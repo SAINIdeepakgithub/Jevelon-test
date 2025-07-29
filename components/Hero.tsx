@@ -56,11 +56,11 @@ export default function Hero() {
           <div className="max-w-4xl mx-auto">
             <motion.h1 
               variants={itemVariants}
-              className="text-4xl md:text-6xl font-bold text-foreground mb-6 leading-tight overflow-visible"
+              className="text-4xl md:text-6xl font-bold text-foreground mb-8 leading-relaxed overflow-visible pb-8"
             >
               Empowering Your Business with 
               <motion.span 
-                className="text-blue-400 inline-block align-baseline"
+                className="text-blue-400 inline-block align-baseline pb-2"
                 initial={{ backgroundPosition: "0% 50%" }}
                 animate={{ backgroundPosition: "100% 50%" }}
                 transition={{ duration: 3, repeat: Infinity, repeatType: "reverse" }}
@@ -72,7 +72,9 @@ export default function Hero() {
                   backgroundClip: "text",
                   overflow: 'visible',
                   display: 'inline-block',
-                  verticalAlign: 'baseline'
+                  verticalAlign: 'baseline',
+                  lineHeight: '1.2',
+                  paddingBottom: '0.5rem'
                 }}
               > Cutting-Edge Technology</motion.span>
             </motion.h1>
@@ -106,7 +108,17 @@ export default function Hero() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <Button size="lg" variant="outline" className="border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-background">
+                <Button 
+                  size="lg" 
+                  variant="outline" 
+                  className="border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-background"
+                  onClick={() => {
+                    const servicesSection = document.querySelector('#services');
+                    if (servicesSection) {
+                      servicesSection.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }}
+                >
                   View Our Services
                 </Button>
               </motion.div>

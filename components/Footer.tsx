@@ -8,10 +8,11 @@ export default function Footer() {
 
   const footerLinks = {
     Services: [
-      { name: "Web Development", href: "/#services" },
-      { name: "App Development", href: "/#services" },
-      { name: "Cloud Services", href: "/#services" },
-      { name: "Maintenance", href: "/#services" }
+      { name: "Web Development", href: "/web-development" },
+      { name: "Frontend Development", href: "/frontend-development" },
+      { name: "Backend Development", href: "/backend-development" },
+      { name: "Mobile App Development", href: "/mobile-app-development" },
+      { name: "Digital Marketing", href: "/digital-marketing" }
     ],
     Company: [
       { name: "About Us", href: "/#about" },
