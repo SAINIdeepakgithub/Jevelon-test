@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
+import SplashScreen from "./components/SplashScreen";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import HomePage from "./pages/HomePage";
@@ -13,7 +14,6 @@ import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
 import TermsOfServicePage from "./pages/TermsOfServicePage";
 import CookiePolicyPage from "./pages/CookiePolicyPage";
 import DisclaimerPage from "./pages/DisclaimerPage";
-import ContactPage from "./pages/ContactPage";
 import FrontendDevelopmentPage from "./pages/FrontendDevelopmentPage";
 import BackendDevelopmentPage from "./pages/BackendDevelopmentPage";
 import WebDevelopmentPage from "./pages/WebDevelopmentPage";
@@ -21,10 +21,19 @@ import MobileAppDevelopmentPage from "./pages/MobileAppDevelopmentPage";
 import DigitalMarketingPage from "./pages/DigitalMarketingPage";
 
 export default function App() {
+  const [showSplash, setShowSplash] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setShowSplash(false), 3000);
+    return () => clearTimeout(timer);
+  }, []);
+
   useEffect(() => {
     // Enable dark theme by default
-    document.documentElement.classList.add('dark');
+    document.documentElement.classList.add("dark");
   }, []);
+
+  if (showSplash) return <SplashScreen />;
 
   return (
     <div className="min-h-screen dark">
@@ -39,7 +48,7 @@ export default function App() {
             <Route path="/support" element={<SupportPage />} />
             <Route path="/careers" element={<CareersPage />} />
             <Route path="/team" element={<TeamPage />} />
-            <Route path="/contact" element={<ContactPage />} />
+            <Route path="/#contact" element={<HomePage />} />
             <Route path="/privacy" element={<PrivacyPolicyPage />} />
             <Route path="/terms" element={<TermsOfServicePage />} />
             <Route path="/cookies" element={<CookiePolicyPage />} />

@@ -13,7 +13,7 @@ export default function Header() {
     { name: "Home", href: "/" },
     { name: "Services", href: "#services" },
     { name: "About", href: "#about" },
-    { name: "Contact", href: "/contact" },
+    { name: "Contact", href: "#contact" },
     { name: "Blog", href: "/blog" },
     { name: "Case Studies", href: "/case-studies" }
   ];
@@ -37,7 +37,7 @@ export default function Header() {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6 }}
-      className="fixed top-0 left-0 right-0 bg-background/95 backdrop-blur-sm border-b border-border z-50"
+      className="fixed top-5 left-0 right-0 bg-background/95 backdrop-blur-sm border-b border-border z-50"
     >
       <div className="w-full px-0 sm:px-6 lg:px-8">
         <div className="flex items-center h-16 gap-4 justify-between">
@@ -97,7 +97,7 @@ export default function Header() {
             className="hidden md:flex"
             style={{ marginLeft: '-25rem' }} // add a small left margin
           >
-            <Link to="/contact">
+            <Link to="#contact">
               <Button size="lg" className="bg-blue-600 hover:bg-blue-500 text-white relative overflow-hidden group px-6 py-3">
                 <span className="relative z-10">Get Started</span>
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-500 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
@@ -154,7 +154,7 @@ export default function Header() {
                   </motion.div>
                 ))}
                 <div className="px-3 py-2">
-                  <Link to="/contact">
+                  <Link to="#contact">
                     <Button className="w-full bg-blue-600 hover:bg-blue-500 text-white">
                       Get Started
                     </Button>

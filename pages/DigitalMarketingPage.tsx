@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../co
 import { CheckCircle, TrendingUp, Search, Share2, BarChart3, ArrowRight, Target, Users } from "lucide-react";
 import { Link } from "react-router-dom";
 import PageHeader from "../components/shared/PageHeader";
+import TechnologyLogo from "../components/ui/TechnologyLogo";
 
 export default function DigitalMarketingPage() {
   const features = [
@@ -58,7 +59,7 @@ export default function DigitalMarketingPage() {
       />
 
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-pink-50 to-purple-50 dark:from-pink-950/20 dark:to-purple-950/20">
+      <section className="pt-32 py-20 bg-gradient-to-br from-pink-50 to-purple-50 dark:from-pink-950/20 dark:to-purple-950/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
@@ -160,7 +161,7 @@ export default function DigitalMarketingPage() {
 
       {/* Services Section */}
       <section className="py-20 bg-muted/30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="w-full px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -168,78 +169,56 @@ export default function DigitalMarketingPage() {
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Our <span className="text-pink-400">Services</span>
+              Technologies We <span className="text-pink-400">Use</span>
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Comprehensive digital marketing solutions tailored to your business needs
+              Comprehensive digital marketing tools and platforms to grow your business
             </p>
           </motion.div>
-
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
             <div className="text-center">
               <div className="w-16 h-16 mx-auto mb-4 bg-pink-100 rounded-lg flex items-center justify-center">
-                <svg className="w-8 h-8 text-pink-600" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                </svg>
-              </div>
-              <h3 className="font-semibold">Google Ads</h3>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 mx-auto mb-4 bg-pink-100 rounded-lg flex items-center justify-center">
-                <svg className="w-8 h-8 text-pink-600" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                </svg>
-              </div>
-              <h3 className="font-semibold">Facebook Ads</h3>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 mx-auto mb-4 bg-pink-100 rounded-lg flex items-center justify-center">
-                <svg className="w-8 h-8 text-pink-600" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                </svg>
-              </div>
-              <h3 className="font-semibold">Instagram</h3>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 mx-auto mb-4 bg-pink-100 rounded-lg flex items-center justify-center">
-                <svg className="w-8 h-8 text-pink-600" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                </svg>
-              </div>
-              <h3 className="font-semibold">LinkedIn</h3>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 mx-auto mb-4 bg-pink-100 rounded-lg flex items-center justify-center">
-                <svg className="w-8 h-8 text-pink-600" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                </svg>
-              </div>
-              <h3 className="font-semibold">Google Analytics</h3>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 mx-auto mb-4 bg-pink-100 rounded-lg flex items-center justify-center">
-                <svg className="w-8 h-8 text-pink-600" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                </svg>
+                <TechnologyLogo name="Mailchimp" logoPath="/assets/logos/mailchimp-freddie-icon.svg" />
               </div>
               <h3 className="font-semibold">Mailchimp</h3>
             </div>
             <div className="text-center">
               <div className="w-16 h-16 mx-auto mb-4 bg-pink-100 rounded-lg flex items-center justify-center">
-                <svg className="w-8 h-8 text-pink-600" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                </svg>
+                <TechnologyLogo name="HubSpot" logoPath="/assets/logos/hubspot-1.svg" />
               </div>
               <h3 className="font-semibold">HubSpot</h3>
             </div>
             <div className="text-center">
               <div className="w-16 h-16 mx-auto mb-4 bg-pink-100 rounded-lg flex items-center justify-center">
-                <svg className="w-8 h-8 text-pink-600" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                </svg>
+                <TechnologyLogo name="Canva" logoPath="/assets/logos/canva.svg" />
               </div>
               <h3 className="font-semibold">Canva</h3>
             </div>
+            <div className="text-center">
+              <div className="w-16 h-16 mx-auto mb-4 bg-pink-100 rounded-lg flex items-center justify-center">
+                <TechnologyLogo name="Apple App Store" logoPath="/assets/logos/apple-app-store.svg" />
+              </div>
+              <h3 className="font-semibold">Apple App Store</h3>
+            </div>
+            <div className="text-center">
+              <div className="w-16 h-16 mx-auto mb-4 bg-pink-100 rounded-lg flex items-center justify-center">
+                <TechnologyLogo name="Google Play" logoPath="/assets/logos/google-play-5.svg" />
+              </div>
+              <h3 className="font-semibold">Google Play</h3>
+            </div>
+            <div className="text-center">
+              <div className="w-16 h-16 mx-auto mb-4 bg-pink-100 rounded-lg flex items-center justify-center">
+                <TechnologyLogo name="Facebook" logoPath="/assets/logos/facebook.svg" />
+              </div>
+              <h3 className="font-semibold">Facebook</h3>
+            </div>
+            <div className="text-center">
+              <div className="w-16 h-16 mx-auto mb-4 bg-pink-100 rounded-lg flex items-center justify-center">
+                <TechnologyLogo name="Instagram" logoPath="/assets/logos/instagram.svg" />
+              </div>
+              <h3 className="font-semibold">Instagram</h3>
+            </div>
+            {/* Add more logos as you upload them, or use fallback icons for missing ones */}
           </div>
         </div>
       </section>

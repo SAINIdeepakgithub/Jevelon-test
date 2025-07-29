@@ -52,7 +52,7 @@ export default function FrontendDevelopmentPage() {
       />
 
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-950/20 dark:to-purple-950/20">
+      <section className="pt-32 py-20 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-950/20 dark:to-purple-950/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
@@ -187,7 +187,7 @@ export default function FrontendDevelopmentPage() {
               <div className="w-16 h-16 mx-auto mb-4 bg-blue-100 rounded-lg flex items-center justify-center">
                 <TechnologyLogo
                   name="Vue.js"
-                  logoPath="/assets/logos/vue.svg"
+                  logoPath="/assets/logos/vuejs.svg"
                   fallbackIcon={
                     <svg className="w-8 h-8 text-blue-600" viewBox="0 0 24 24" fill="currentColor">
                       <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
@@ -229,7 +229,7 @@ export default function FrontendDevelopmentPage() {
               <div className="w-16 h-16 mx-auto mb-4 bg-blue-100 rounded-lg flex items-center justify-center">
                 <TechnologyLogo
                   name="Tailwind CSS"
-                  logoPath="/assets/logos/tailwind.svg"
+                  logoPath="/assets/logos/tailwind-css.svg"
                   fallbackIcon={
                     <svg className="w-8 h-8 text-blue-600" viewBox="0 0 24 24" fill="currentColor">
                       <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
@@ -243,7 +243,7 @@ export default function FrontendDevelopmentPage() {
               <div className="w-16 h-16 mx-auto mb-4 bg-blue-100 rounded-lg flex items-center justify-center">
                 <TechnologyLogo
                   name="Sass"
-                  logoPath="/assets/logos/sass.svg"
+                  logoPath="/assets/logos/saas.png"
                   fallbackIcon={
                     <svg className="w-8 h-8 text-blue-600" viewBox="0 0 24 24" fill="currentColor">
                       <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
@@ -257,7 +257,7 @@ export default function FrontendDevelopmentPage() {
               <div className="w-16 h-16 mx-auto mb-4 bg-blue-100 rounded-lg flex items-center justify-center">
                 <TechnologyLogo
                   name="Next.js"
-                  logoPath="/assets/logos/nextjs.svg"
+                  logoPath="/assets/logos/Next.js.svg"
                   fallbackIcon={
                     <svg className="w-8 h-8 text-blue-600" viewBox="0 0 24 24" fill="currentColor">
                       <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
@@ -271,7 +271,7 @@ export default function FrontendDevelopmentPage() {
               <div className="w-16 h-16 mx-auto mb-4 bg-blue-100 rounded-lg flex items-center justify-center">
                 <TechnologyLogo
                   name="Framer Motion"
-                  logoPath="/assets/logos/framer.svg"
+                  logoPath="/assets/logos/framer motion.svg"
                   fallbackIcon={
                     <svg className="w-8 h-8 text-blue-600" viewBox="0 0 24 24" fill="currentColor">
                       <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>

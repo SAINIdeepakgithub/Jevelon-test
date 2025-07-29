@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../co
 import { CheckCircle, Smartphone, Zap, Palette, Download, ArrowRight, Code, Users } from "lucide-react";
 import { Link } from "react-router-dom";
 import PageHeader from "../components/shared/PageHeader";
+import TechnologyLogo from "../components/ui/TechnologyLogo";
 
 export default function MobileAppDevelopmentPage() {
   const features = [
@@ -57,7 +58,7 @@ export default function MobileAppDevelopmentPage() {
       />
 
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-orange-50 to-red-50 dark:from-orange-950/20 dark:to-red-950/20">
+      <section className="pt-32 py-20 bg-gradient-to-br from-orange-50 to-blue-50 dark:from-orange-950/20 dark:to-blue-950/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
@@ -159,7 +160,7 @@ export default function MobileAppDevelopmentPage() {
 
       {/* Technologies Section */}
       <section className="py-20 bg-muted/30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="w-full px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -173,72 +174,56 @@ export default function MobileAppDevelopmentPage() {
               Modern mobile development technologies and frameworks for building powerful apps
             </p>
           </motion.div>
-
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
             <div className="text-center">
               <div className="w-16 h-16 mx-auto mb-4 bg-orange-100 rounded-lg flex items-center justify-center">
-                <svg className="w-8 h-8 text-orange-600" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                </svg>
+                <TechnologyLogo name="Vercel" logoPath="/assets/logos/vercel.svg" />
+              </div>
+              <h3 className="font-semibold">Vercel</h3>
+            </div>
+            <div className="text-center">
+              <div className="w-16 h-16 mx-auto mb-4 bg-orange-100 rounded-lg flex items-center justify-center">
+                <TechnologyLogo name="React Native" logoPath="/assets/logos/expo-1.svg" />
               </div>
               <h3 className="font-semibold">React Native</h3>
             </div>
             <div className="text-center">
               <div className="w-16 h-16 mx-auto mb-4 bg-orange-100 rounded-lg flex items-center justify-center">
-                <svg className="w-8 h-8 text-orange-600" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                </svg>
+                <TechnologyLogo name="AWS Mobile" logoPath="/assets/logos/amazon-web-services-2.svg" />
+              </div>
+              <h3 className="font-semibold">AWS Mobile</h3>
+            </div>
+            <div className="text-center">
+              <div className="w-16 h-16 mx-auto mb-4 bg-orange-100 rounded-lg flex items-center justify-center">
+                <TechnologyLogo name="Flutter" logoPath="/assets/logos/flutter.svg" />
               </div>
               <h3 className="font-semibold">Flutter</h3>
             </div>
             <div className="text-center">
               <div className="w-16 h-16 mx-auto mb-4 bg-orange-100 rounded-lg flex items-center justify-center">
-                <svg className="w-8 h-8 text-orange-600" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                </svg>
+                <TechnologyLogo name="Swift" logoPath="/assets/logos/swift-15.svg" />
               </div>
               <h3 className="font-semibold">Swift</h3>
             </div>
             <div className="text-center">
               <div className="w-16 h-16 mx-auto mb-4 bg-orange-100 rounded-lg flex items-center justify-center">
-                <svg className="w-8 h-8 text-orange-600" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                </svg>
+                <TechnologyLogo name="Kotlin" logoPath="/assets/logos/kotlin-1.svg" />
               </div>
               <h3 className="font-semibold">Kotlin</h3>
             </div>
             <div className="text-center">
               <div className="w-16 h-16 mx-auto mb-4 bg-orange-100 rounded-lg flex items-center justify-center">
-                <svg className="w-8 h-8 text-orange-600" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                </svg>
+                <TechnologyLogo name="Firebase" logoPath="/assets/logos/firebase-1.svg" />
               </div>
               <h3 className="font-semibold">Firebase</h3>
             </div>
             <div className="text-center">
               <div className="w-16 h-16 mx-auto mb-4 bg-orange-100 rounded-lg flex items-center justify-center">
-                <svg className="w-8 h-8 text-orange-600" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                </svg>
-              </div>
-              <h3 className="font-semibold">AWS Amplify</h3>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 mx-auto mb-4 bg-orange-100 rounded-lg flex items-center justify-center">
-                <svg className="w-8 h-8 text-orange-600" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                </svg>
+                <TechnologyLogo name="Apple App Store" logoPath="/assets/logos/apple-app-store.svg" />
               </div>
               <h3 className="font-semibold">App Store</h3>
             </div>
-            <div className="text-center">
-              <div className="w-16 h-16 mx-auto mb-4 bg-orange-100 rounded-lg flex items-center justify-center">
-                <svg className="w-8 h-8 text-orange-600" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                </svg>
-              </div>
-              <h3 className="font-semibold">Google Play</h3>
-            </div>
+            {/* Add more logos as needed, or use fallback icons for missing ones */}
           </div>
         </div>
       </section>
