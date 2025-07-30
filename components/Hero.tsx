@@ -1,6 +1,7 @@
 import { Button } from "./ui/button";
 import { ArrowRight, Code, Smartphone, Database, Palette, Megaphone } from "lucide-react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 export default function Hero() {
   const containerVariants = {
@@ -131,29 +132,30 @@ export default function Hero() {
             className="grid grid-cols-2 md:grid-cols-5 gap-8 max-w-3xl mx-auto"
           >
             {[
-              { icon: Palette, label: "Frontend Development", color: "blue" },
-              { icon: Database, label: "Backend Development", color: "green" },
-              { icon: Code, label: "Web Development", color: "purple" },
-              { icon: Smartphone, label: "Mobile App Development", color: "orange" },
-              { icon: Megaphone, label: "Digital Marketing", color: "pink" }
+              { icon: Palette, label: "Frontend Development", color: "blue", path: "/services/frontend-development" },
+              { icon: Database, label: "Backend Development", color: "green", path: "/services/backend-development" },
+              { icon: Code, label: "Web Development", color: "purple", path: "/services/web-development" },
+              { icon: Smartphone, label: "Mobile App Development", color: "orange", path: "/services/mobile-app-development" },
+              { icon: Megaphone, label: "Digital Marketing", color: "pink", path: "/services/digital-marketing" }
             ].map((service) => {
               const IconComponent = service.icon;
               return (
-                <motion.div
-                  key={service.label}
-                  variants={iconVariants}
-                  whileHover={{ 
-                    scale: 1.1,
-                    rotate: [0, -5, 5, 0],
-                    transition: { duration: 0.3 }
-                  }}
-                  className="flex flex-col items-center space-y-2 group cursor-pointer"
-                >
-                  <div className={`p-3 bg-${service.color}-500/20 rounded-full group-hover:bg-${service.color}-500/30 transition-colors backdrop-blur-sm border border-${service.color}-500/30`}>
-                    <IconComponent className={`h-8 w-8 text-${service.color}-400`} />
-                  </div>
-                  <span className="text-sm font-medium text-muted-foreground group-hover:text-foreground transition-colors">{service.label}</span>
-                </motion.div>
+                <Link key={service.label} to={service.path}>
+                  <motion.div
+                    variants={iconVariants}
+                    whileHover={{ 
+                      scale: 1.1,
+                      rotate: [0, -5, 5, 0],
+                      transition: { duration: 0.3 }
+                    }}
+                    className="flex flex-col items-center space-y-2 group cursor-pointer"
+                  >
+                    <div className={`p-3 bg-${service.color}-500/20 rounded-full group-hover:bg-${service.color}-500/30 transition-colors backdrop-blur-sm border border-${service.color}-500/30`}>
+                      <IconComponent className={`h-8 w-8 text-${service.color}-400`} />
+                    </div>
+                    <span className="text-sm font-medium text-muted-foreground group-hover:text-foreground transition-colors">{service.label}</span>
+                  </motion.div>
+                </Link>
               );
             })}
           </motion.div>

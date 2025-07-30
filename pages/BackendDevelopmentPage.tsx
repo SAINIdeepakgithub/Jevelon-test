@@ -71,18 +71,20 @@ export default function BackendDevelopmentPage() {
                 <span className="text-green-400 block">That Scales</span>
               </h1>
               <p className="text-xl text-muted-foreground mb-8">
-                We specialize in building robust, scalable backend systems that power modern applications. Our server-side solutions are designed for performance, security, and maintainability.
+                We specialize in building robust, scalable <Link to="/services/backend-development" className="text-green-400 hover:text-green-300 underline">backend systems</Link> that power modern applications. Our server-side solutions are designed for performance, security, and maintainability.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link to="/contact">
+                <Link to="/#contact">
                   <Button size="lg" className="bg-green-500 hover:bg-green-600">
                     Get Started
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </Button>
                 </Link>
-                <Button variant="outline" size="lg">
-                  View Case Studies
-                </Button>
+                <Link to="/case-studies">
+                  <Button variant="outline" size="lg">
+                    View Case Studies
+                  </Button>
+                </Link>
               </div>
             </motion.div>
             <motion.div
@@ -315,7 +317,7 @@ export default function BackendDevelopmentPage() {
             <p className="text-xl text-green-100 mb-8 max-w-2xl mx-auto">
               Let's discuss your backend requirements and create a robust foundation for your application.
             </p>
-            <Link to="/contact">
+            <Link to="/#contact">
               <Button size="lg" variant="secondary" className="bg-white text-green-600 hover:bg-gray-100">
                 Get Started Today
                 <ArrowRight className="ml-2 h-5 w-5" />

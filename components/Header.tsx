@@ -96,7 +96,7 @@ export default function Header() {
             transition={{ delay: 0.8 }}
             className="hidden md:flex"
           >
-            <Link to="#contact">
+            <Link to="/#contact">
               <Button size="lg" className="bg-blue-600 hover:bg-blue-500 text-white relative overflow-hidden group px-6 py-3">
                 <span className="relative z-10">Get Started</span>
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-500 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
@@ -169,7 +169,7 @@ export default function Header() {
                   transition={{ delay: navItems.length * 0.1 }}
                   className="pt-2"
                 >
-                  <Link to="#contact" onClick={() => setIsMenuOpen(false)}>
+                  <Link to="/#contact" onClick={() => setIsMenuOpen(false)}>
                     <Button className="w-full bg-blue-600 hover:bg-blue-500 text-white py-3">
                       Get Started
                     </Button>

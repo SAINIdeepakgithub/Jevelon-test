@@ -37,19 +37,19 @@ export default function Contact() {
     {
       icon: Phone,
       title: "Phone",
-      value: "+1 (555) 123-4567",
-      href: "tel:+15551234567"
+      value: "+91-141-13143238",
+      href: "tel:+9114113143238"
     },
     {
       icon: MapPin,
       title: "Address",
-      value: "123 Tech Street, Innovation City, IC 12345",
+      value: "Jaipur,Rajasthan,India",
       href: "#"
     },
     {
       icon: Clock,
       title: "Hours",
-      value: "Mon-Fri: 9AM-6PM EST",
+      value: "Mon-Fri: 9AM-6PM IST",
       href: "#"
     }
   ];

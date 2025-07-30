@@ -1,21 +1,21 @@
 export const supportPlans = [
   {
     name: "Basic Support",
-    price: "$99/month",
+    price: "₹5000/month",
     description: "Essential support for small projects",
     features: [
       "Email support",
       "48-hour response time",
       "Bug fixes",
       "Basic documentation",
-      "5 hours/month included"
+      "All Basic Queries Sollution"
     ],
     color: "blue",
     popular: false
   },
   {
     name: "Professional Support",
-    price: "$299/month",
+    price: "₹12000/month",
     description: "Comprehensive support for growing businesses",
     features: [
       "Priority email & phone support",
@@ -23,7 +23,7 @@ export const supportPlans = [
       "Bug fixes & updates",
       "Performance monitoring",
       "15 hours/month included",
-      "Emergency hotline"
+      "Emergency hotline",
     ],
     color: "green",
     popular: true
@@ -59,7 +59,7 @@ export const supportChannels = [
     icon: "Phone",
     title: "Phone Support",
     description: "Speak directly with our technical experts",
-    availability: "Mon-Fri 9AM-6PM EST",
+    availability: "Mon-Fri 9AM-6PM IST",
     responseTime: "Immediate",
     color: "green"
   },

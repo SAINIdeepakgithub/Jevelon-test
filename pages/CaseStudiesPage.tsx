@@ -8,6 +8,7 @@ import { caseStudies, caseStudyStats } from "../data/caseStudiesData";
 import { containerVariants, itemVariants } from "../utils/animations";
 import PageHeader from "../components/shared/PageHeader";
 import CaseStudyCard from "../components/caseStudies/CaseStudyCard";
+import { Link } from "react-router-dom";
 
 const iconMap = {
   Award,
@@ -86,7 +87,7 @@ export default function CaseStudiesPage() {
                     {featuredStudy.description}
                   </p>
                   
-                  <div className="grid grid-cols-3 gap-4 mb-6">
+                  <div className="grid grid-cols-3 gap-4">
                     {featuredStudy.results.map((result, index) => (
                       <div key={index} className="text-center">
                         <div className="text-xl font-bold text-green-400">{result.increase}</div>
@@ -94,11 +95,6 @@ export default function CaseStudiesPage() {
                       </div>
                     ))}
                   </div>
-                  
-                  <Button className="bg-blue-600 hover:bg-blue-500 text-white group w-fit">
-                    View Full Case Study
-                    <ExternalLink className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                  </Button>
                 </CardContent>
               </div>
             </Card>
@@ -130,10 +126,12 @@ export default function CaseStudiesPage() {
           <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
             Let's discuss how we can help transform your business with innovative technology solutions.
           </p>
-          <Button size="lg" className="bg-blue-600 hover:bg-blue-500 text-white">
-            Start Your Project
-            <ArrowRight className="ml-2 h-5 w-5" />
-          </Button>
+          <Link to="/#contact">
+            <Button size="lg" className="bg-blue-600 hover:bg-blue-500 text-white">
+              Start Your Project
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
+          </Link>
         </motion.div>
       </div>
     </div>

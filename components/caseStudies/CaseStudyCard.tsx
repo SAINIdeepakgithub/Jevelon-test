@@ -68,7 +68,7 @@ export default function CaseStudyCard({ study, variants }: CaseStudyCardProps) {
           </div>
           
           {/* Technologies */}
-          <div className="flex flex-wrap gap-1 mb-4">
+          <div className="flex flex-wrap gap-1">
             {study.technologies.slice(0, 3).map((tech) => (
               <Badge key={tech} variant="outline" className="text-xs">
                 {tech}
@@ -80,11 +80,6 @@ export default function CaseStudyCard({ study, variants }: CaseStudyCardProps) {
               </Badge>
             )}
           </div>
-          
-          <Button variant="ghost" size="sm" className="text-blue-400 hover:text-blue-300 group w-fit">
-            View Details
-            <ArrowRight className="ml-1 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-          </Button>
         </CardContent>
       </Card>
     </motion.div>

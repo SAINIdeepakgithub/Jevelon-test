@@ -65,18 +65,20 @@ export default function FrontendDevelopmentPage() {
                 <span className="text-blue-400 block">That Converts</span>
               </h1>
               <p className="text-xl text-muted-foreground mb-8">
-                We specialize in creating beautiful, responsive frontend experiences that engage your audience and drive business growth. Our designs are not just visually appealing but also optimized for performance and conversion.
+                We specialize in creating beautiful, responsive <Link to="/services/frontend-development" className="text-blue-400 hover:text-blue-300 underline">frontend experiences</Link> that engage your audience and drive business growth. Our designs are not just visually appealing but also optimized for performance and conversion.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link to="/contact">
+                <Link to="/#contact">
                   <Button size="lg" className="bg-blue-500 hover:bg-blue-600">
                     Get Started
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </Button>
                 </Link>
-                <Button variant="outline" size="lg">
-                  View Portfolio
-                </Button>
+                <Link to="/case-studies">
+                  <Button variant="outline" size="lg">
+                    View Case Studies
+                  </Button>
+                </Link>
               </div>
             </motion.div>
             <motion.div
@@ -373,7 +375,7 @@ export default function FrontendDevelopmentPage() {
             <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
               Let's discuss your project requirements and create a stunning frontend that drives results for your business.
             </p>
-            <Link to="/contact">
+            <Link to="/#contact">
               <Button size="lg" variant="secondary" className="bg-white text-blue-600 hover:bg-gray-100">
                 Get Started Today
                 <ArrowRight className="ml-2 h-5 w-5" />

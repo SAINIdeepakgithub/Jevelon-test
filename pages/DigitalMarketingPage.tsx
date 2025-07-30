@@ -72,18 +72,20 @@ export default function DigitalMarketingPage() {
                 <span className="text-pink-400 block">That Converts</span>
               </h1>
               <p className="text-xl text-muted-foreground mb-8">
-                We develop data-driven digital marketing strategies that increase your online visibility, engage your audience, and drive measurable business results. Our comprehensive approach ensures your marketing efforts deliver ROI.
+                We develop data-driven <Link to="/services/digital-marketing" className="text-pink-400 hover:text-pink-300 underline">digital marketing strategies</Link> that increase your online visibility, engage your audience, and drive measurable business results. Our comprehensive approach ensures your marketing efforts deliver ROI.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link to="/contact">
+                <Link to="/#contact">
                   <Button size="lg" className="bg-pink-500 hover:bg-pink-600">
                     Get Started
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </Button>
                 </Link>
-                <Button variant="outline" size="lg">
-                  View Case Studies
-                </Button>
+                <Link to="/case-studies">
+                  <Button variant="outline" size="lg">
+                    View Case Studies
+                  </Button>
+                </Link>
               </div>
             </motion.div>
             <motion.div
@@ -311,7 +313,7 @@ export default function DigitalMarketingPage() {
             <p className="text-xl text-pink-100 mb-8 max-w-2xl mx-auto">
               Let's discuss your digital marketing needs and create a strategy that drives results for your business.
             </p>
-            <Link to="/contact">
+            <Link to="/#contact">
               <Button size="lg" variant="secondary" className="bg-white text-pink-600 hover:bg-gray-100">
                 Get Started Today
                 <ArrowRight className="ml-2 h-5 w-5" />

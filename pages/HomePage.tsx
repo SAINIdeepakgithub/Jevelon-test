@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Hero from "../components/Hero";
+import TechStackStrip from "../components/TechStackStrip";
 import Services from "../components/Services";
 import About from "../components/About";
 import Contact from "../components/Contact";
@@ -20,6 +21,7 @@ export default function HomePage() {
   return (
     <>
       <Hero />
+      <TechStackStrip />
       <Services />
       <About />
       <Contact />

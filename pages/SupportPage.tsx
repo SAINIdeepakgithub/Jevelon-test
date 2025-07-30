@@ -30,21 +30,21 @@ export default function SupportPage() {
   const supportPlans = [
     {
       name: "Basic Support",
-      price: "$99/month",
+      price: "₹5000/month",
       description: "Essential support for small projects",
       features: [
         "Email support",
         "48-hour response time",
         "Bug fixes",
         "Basic documentation",
-        "5 hours/month included"
+        "All Basic Query Sollution"
       ],
       color: "blue",
       popular: false
     },
     {
       name: "Professional Support",
-      price: "$299/month",
+      price: "₹12000/month",
       description: "Comprehensive support for growing businesses",
       features: [
         "Priority email & phone support",
@@ -76,14 +76,6 @@ export default function SupportPage() {
   ];
 
   const supportChannels = [
-    {
-      icon: MessageCircle,
-      title: "Live Chat",
-      description: "Get instant help from our support team",
-      availability: "24/7",
-      responseTime: "< 5 minutes",
-      color: "blue"
-    },
     {
       icon: Phone,
       title: "Phone Support",
@@ -174,7 +166,7 @@ export default function SupportPage() {
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="grid md:grid-cols-3 gap-8 mb-16"
+          className="grid md:grid-cols-2 gap-8 mb-16"
         >
           {supportChannels.map((channel) => {
             const IconComponent = channel.icon;
@@ -199,9 +191,19 @@ export default function SupportPage() {
                       <Zap className="h-4 w-4 text-muted-foreground" />
                       <span className="text-sm text-muted-foreground">Response: {channel.responseTime}</span>
                     </div>
-                    <Button className={`w-full mt-4 ${colors.button} text-white`}>
-                      Contact Now
-                    </Button>
+                    {channel.title === "Phone Support" ? (
+                      <a href="tel:+911413143238">
+                        <Button className={`w-full mt-4 ${colors.button} text-white`}>
+                          Call: +91 1413143238
+                        </Button>
+                      </a>
+                    ) : (
+                      <a href="mailto:hello@jevelon.com">
+                        <Button className={`w-full mt-4 ${colors.button} text-white`}>
+                          Email: hello@jevelon.com
+                        </Button>
+                      </a>
+                    )}
                   </CardContent>
                 </Card>
               </motion.div>
@@ -256,9 +258,19 @@ export default function SupportPage() {
                           </li>
                         ))}
                       </ul>
-                      <Button className={`w-full ${colors.button} text-white`}>
-                        {plan.price === "Custom" ? "Contact Sales" : "Get Started"}
-                      </Button>
+                      {plan.price === "Custom" ? (
+                        <a href="mailto:support@jevelon.com">
+                          <Button className={`w-full ${colors.button} text-white`}>
+                            Contact Sales
+                          </Button>
+                        </a>
+                      ) : (
+                        <a href="mailto:support@jevelon.com">
+                          <Button className={`w-full ${colors.button} text-white`}>
+                            Get Started
+                          </Button>
+                        </a>
+                      )}
                     </CardContent>
                   </Card>
                 </motion.div>
@@ -285,31 +297,33 @@ export default function SupportPage() {
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block mb-2">Name *</label>
+                    <label className="block mb-2 text-foreground font-medium">Name *</label>
                     <Input
                       required
                       value={formData.name}
                       onChange={(e) => handleInputChange("name", e.target.value)}
                       placeholder="Your Name"
+                      className="text-black"
                     />
                   </div>
                   <div>
-                    <label className="block mb-2">Email *</label>
+                    <label className="block mb-2 text-foreground font-medium">Email *</label>
                     <Input
                       type="email"
                       required
                       value={formData.email}
                       onChange={(e) => handleInputChange("email", e.target.value)}
                       placeholder="your@email.com"
+                      className="text-black"
                     />
                   </div>
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block mb-2">Priority</label>
+                    <label className="block mb-2 text-foreground font-medium">Priority</label>
                     <Select value={formData.priority} onValueChange={(value) => handleInputChange("priority", value)}>
-                      <SelectTrigger>
+                      <SelectTrigger className="text-black">
                         <SelectValue placeholder="Select priority" />
                       </SelectTrigger>
                       <SelectContent>
@@ -341,9 +355,9 @@ export default function SupportPage() {
                     </Select>
                   </div>
                   <div>
-                    <label className="block mb-2">Category</label>
+                    <label className="block mb-2 text-foreground font-medium">Category</label>
                     <Select value={formData.category} onValueChange={(value) => handleInputChange("category", value)}>
-                      <SelectTrigger>
+                      <SelectTrigger className="text-black">
                         <SelectValue placeholder="Select category" />
                       </SelectTrigger>
                       <SelectContent>
@@ -358,23 +372,25 @@ export default function SupportPage() {
                 </div>
 
                 <div>
-                  <label className="block mb-2">Subject *</label>
+                  <label className="block mb-2 text-foreground font-medium">Subject *</label>
                   <Input
                     required
                     value={formData.subject}
                     onChange={(e) => handleInputChange("subject", e.target.value)}
                     placeholder="Brief description of the issue"
+                    className="text-black"
                   />
                 </div>
 
                 <div>
-                  <label className="block mb-2">Description *</label>
+                  <label className="block mb-2 text-foreground font-medium">Description *</label>
                   <Textarea
                     required
                     rows={6}
                     value={formData.message}
                     onChange={(e) => handleInputChange("message", e.target.value)}
                     placeholder="Please provide detailed information about your issue, including steps to reproduce, error messages, and any relevant context..."
+                    className="text-black"
                   />
                 </div>
 
@@ -387,35 +403,7 @@ export default function SupportPage() {
           </Card>
         </motion.div>
 
-        {/* Emergency Contact */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8, duration: 0.6 }}
-          className="mt-16"
-        >
-          <Card className="bg-red-950/20 border-red-500/20">
-            <CardContent className="p-6 text-center">
-              <AlertCircle className="h-12 w-12 text-red-400 mx-auto mb-4" />
-              <h3 className="text-xl font-bold text-foreground mb-2">
-                Emergency Support
-              </h3>
-              <p className="text-muted-foreground mb-4">
-                For critical system outages or security incidents
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button variant="outline" className="border-red-400 text-red-400 hover:bg-red-400 hover:text-background">
-                  <Phone className="mr-2 h-4 w-4" />
-                  Emergency Hotline: +1 (555) 911-HELP
-                </Button>
-                <Button variant="outline" className="border-red-400 text-red-400 hover:bg-red-400 hover:text-background">
-                  <Mail className="mr-2 h-4 w-4" />
-                  emergency@jevelon.com
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-        </motion.div>
+
       </div>
     </div>
   );

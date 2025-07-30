@@ -71,18 +71,20 @@ export default function MobileAppDevelopmentPage() {
                 <span className="text-orange-400 block">That Engages</span>
               </h1>
               <p className="text-xl text-muted-foreground mb-8">
-                We build mobile applications that users love to use. Our apps combine beautiful design with powerful functionality, delivering experiences that keep users engaged and coming back for more.
+                We build <Link to="/services/mobile-app-development" className="text-orange-400 hover:text-orange-300 underline">mobile applications</Link> that users love to use. Our apps combine beautiful design with powerful functionality, delivering experiences that keep users engaged and coming back for more.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link to="/contact">
+                <Link to="/#contact">
                   <Button size="lg" className="bg-orange-500 hover:bg-orange-600">
                     Get Started
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </Button>
                 </Link>
-                <Button variant="outline" size="lg">
-                  View Portfolio
-                </Button>
+                <Link to="/case-studies">
+                  <Button variant="outline" size="lg">
+                    View Case Studies
+                  </Button>
+                </Link>
               </div>
             </motion.div>
             <motion.div
@@ -316,7 +318,7 @@ export default function MobileAppDevelopmentPage() {
             <p className="text-xl text-orange-100 mb-8 max-w-2xl mx-auto">
               Let's discuss your mobile app requirements and create an engaging application that drives user engagement and business growth.
             </p>
-            <Link to="/contact">
+            <Link to="/#contact">
               <Button size="lg" variant="secondary" className="bg-white text-orange-600 hover:bg-gray-100">
                 Get Started Today
                 <ArrowRight className="ml-2 h-5 w-5" />

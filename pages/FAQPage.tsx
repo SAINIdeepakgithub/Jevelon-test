@@ -112,19 +112,19 @@ export default function FAQPage() {
                 Can't find the answer you're looking for? Our team is here to help.
               </p>
               
-              <div className="grid md:grid-cols-3 gap-4">
-                <Button variant="outline" className="border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-background">
-                  <MessageCircle className="mr-2 h-4 w-4" />
-                  Live Chat
-                </Button>
-                <Button variant="outline" className="border-green-400 text-green-400 hover:bg-green-400 hover:text-background">
-                  <Phone className="mr-2 h-4 w-4" />
-                  Call Us
-                </Button>
-                <Button variant="outline" className="border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-background">
-                  <Mail className="mr-2 h-4 w-4" />
-                  Send Email
-                </Button>
+              <div className="grid md:grid-cols-2 gap-4">
+                <a href="tel:+911413143238">
+                  <Button variant="outline" className="border-green-400 text-green-400 hover:bg-green-400 hover:text-background w-full">
+                    <Phone className="mr-2 h-4 w-4" />
+                    Call Us
+                  </Button>
+                </a>
+                <a href="mailto:hello@jevelon.com">
+                  <Button variant="outline" className="border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-background w-full">
+                    <Mail className="mr-2 h-4 w-4" />
+                    Send Email
+                  </Button>
+                </a>
               </div>
             </CardContent>
           </Card>
