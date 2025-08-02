@@ -5,13 +5,15 @@ import { Calendar, Clock, ArrowRight } from "lucide-react";
 import { ImageWithFallback } from "../figma/ImageWithFallback";
 
 interface BlogPost {
-  id: number;
+  id: string;
   title: string;
   excerpt: string;
   category: string;
   date: string;
   readTime: string;
   image: string;
+  url: string;
+  source: string;
   featured?: boolean;
 }
 
@@ -40,9 +42,12 @@ export default function FeaturedBlogCard({ post }: FeaturedBlogCardProps) {
           <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
             {post.title}
           </h2>
-          <p className="text-muted-foreground mb-6 text-lg">
+          <p className="text-muted-foreground mb-4 text-lg">
             {post.excerpt}
           </p>
+          <div className="text-sm text-muted-foreground mb-6">
+            Source: {post.source}
+          </div>
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4 text-sm text-muted-foreground">
               <div className="flex items-center">
@@ -54,7 +59,10 @@ export default function FeaturedBlogCard({ post }: FeaturedBlogCardProps) {
                 {post.readTime}
               </div>
             </div>
-            <Button className="bg-blue-600 hover:bg-blue-500 text-white group">
+            <Button 
+              className="bg-blue-600 hover:bg-blue-500 text-white group"
+              onClick={() => window.open(post.url, '_blank')}
+            >
               Read More
               <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
             </Button>

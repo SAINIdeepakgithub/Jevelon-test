@@ -1,10 +1,13 @@
 import { Separator } from "./ui/separator";
 import { Github, Linkedin, Twitter, Mail } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useScrollToTop } from "../utils/useScrollToTop";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+  const navigate = useNavigate();
+  useScrollToTop();
 
   const footerLinks = {
     Services: [
@@ -42,11 +45,22 @@ export default function Footer() {
 
   const handleNavClick = (href: string) => {
     if (href.startsWith("/#")) {
+      // Handle anchor links (same page navigation)
       setTimeout(() => {
         const element = document.querySelector(href.substring(1));
         if (element) {
           element.scrollIntoView({ behavior: "smooth" });
         }
+      }, 100);
+    } else {
+      // Handle page navigation - scroll to top after navigation
+      navigate(href);
+      setTimeout(() => {
+        window.scrollTo({
+          top: 0,
+          left: 0,
+          behavior: 'smooth'
+        });
       }, 100);
     }
   };
@@ -111,22 +125,12 @@ export default function Footer() {
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ delay: (categoryIndex + 1) * 0.1 + linkIndex * 0.05, duration: 0.4 }}
                   >
-                    {link.href.startsWith("/#") ? (
-                      <Link
-                        to="/"
-                        onClick={() => handleNavClick(link.href)}
-                        className="text-muted-foreground hover:text-blue-400 transition-colors duration-200 hover:translate-x-1 inline-block"
-                      >
-                        {link.name}
-                      </Link>
-                    ) : (
-                      <Link
-                        to={link.href}
-                        className="text-muted-foreground hover:text-blue-400 transition-colors duration-200 hover:translate-x-1 inline-block"
-                      >
-                        {link.name}
-                      </Link>
-                    )}
+                    <button
+                      onClick={() => handleNavClick(link.href)}
+                      className="text-muted-foreground hover:text-blue-400 transition-colors duration-200 hover:translate-x-1 inline-block text-left"
+                    >
+                      {link.name}
+                    </button>
                   </motion.li>
                 ))}
               </ul>

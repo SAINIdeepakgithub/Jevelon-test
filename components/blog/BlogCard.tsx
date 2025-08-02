@@ -6,13 +6,15 @@ import { motion } from "framer-motion";
 import { ImageWithFallback } from "../figma/ImageWithFallback";
 
 interface BlogPost {
-  id: number;
+  id: string;
   title: string;
   excerpt: string;
   category: string;
   date: string;
   readTime: string;
   image: string;
+  url: string;
+  source: string;
   featured?: boolean;
 }
 
@@ -47,6 +49,9 @@ export default function BlogCard({ post, variants }: BlogCardProps) {
               <span>{post.date}</span>
             </div>
           </div>
+          <div className="text-xs text-muted-foreground mb-2">
+            Source: {post.source}
+          </div>
           <CardTitle className="text-lg group-hover:text-blue-400 transition-colors">
             {post.title}
           </CardTitle>
@@ -60,7 +65,12 @@ export default function BlogCard({ post, variants }: BlogCardProps) {
               <Clock className="h-4 w-4 mr-1" />
               {post.readTime}
             </div>
-            <Button variant="ghost" size="sm" className="text-blue-400 hover:text-blue-300 group">
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              className="text-blue-400 hover:text-blue-300 group"
+              onClick={() => window.open(post.url, '_blank')}
+            >
               Read More
               <ArrowRight className="ml-1 h-4 w-4 group-hover:translate-x-1 transition-transform" />
             </Button>

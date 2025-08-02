@@ -33,7 +33,7 @@ export default function FAQPage() {
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-5 w-5" />
             <Input 
               placeholder="Search FAQs..." 
-              className="pl-10 bg-muted/30 border-muted-foreground/20"
+              className="pl-10 bg-muted/30 border-muted-foreground/20 text-black"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
