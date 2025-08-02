@@ -1,6 +1,6 @@
 import { Separator } from "./ui/separator";
-import { Github, Linkedin, Twitter, Mail } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
+import { Facebook, Linkedin, Twitter, Mail,Instagram } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useScrollToTop } from "../utils/useScrollToTop";
 
@@ -37,9 +37,9 @@ export default function Footer() {
   };
 
   const socialLinks = [
-    { name: "GitHub", icon: Github, href: "https://github.com" },
-    { name: "LinkedIn", icon: Linkedin, href: "https://linkedin.com" },
-    { name: "Twitter", icon: Twitter, href: "https://twitter.com" },
+    { name: "Instagram", icon: Instagram, href: "https://www.instagram.com" },
+    { name: "LinkedIn", icon: Linkedin, href: "https://www.linkedin.com/company/87378319/admin/dashboard/" },
+    { name: "Twitter", icon: Twitter, href: "https://x.com/Zets_in" },
     { name: "Email", icon: Mail, href: "mailto:hello@jevelon.com" }
   ];
 
