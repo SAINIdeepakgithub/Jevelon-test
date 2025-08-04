@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: jevelon-backend
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn jevelon_backend.wsgi:application
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: jevelon-db
+          property: connectionString
+      - key: DJANGO_SECRET_KEY
+        generateValue: true
+      - key: SENDGRID_API_KEY
+        sync: false
+      - key: ALLOWED_HOSTS
+        value: ".onrender.com"
+      - key: DEBUG
+        value: "False"
+
+databases:
+  - name: jevelon-db
+    databaseName: jevelon_db
+    user: jevelon_user 

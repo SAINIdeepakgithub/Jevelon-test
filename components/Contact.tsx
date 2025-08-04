@@ -31,13 +31,31 @@ export default function Contact() {
 
   const [isConsultationModalOpen, setIsConsultationModalOpen] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log("Form submitted:", formData);
-    // Reset form
-    setFormData({ name: "", email: "", service: "", message: "" });
-    alert("Thank you for your message! We'll get back to you soon.");
+    
+    try {
+      const response = await fetch('http://127.0.0.1:8000/api/contact/submit/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        alert("Thank you for your message! We'll get back to you soon.");
+        // Reset form
+        setFormData({ name: "", email: "", service: "", message: "" });
+      } else {
+        alert(`Error: ${result.error || 'Something went wrong'}`);
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      alert("An error occurred while submitting your message. Please try again.");
+    }
   };
 
   const handleConsultationSubmit = async (e: React.FormEvent) => {

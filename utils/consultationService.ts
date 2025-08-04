@@ -106,23 +106,37 @@ export class ConsultationService {
         throw new Error('Invalid consultation data');
       }
 
-      // Create calendar event
-      const eventId = await this.calendarService.createEvent(consultation);
+      // Send to Django API
+      const response = await fetch('http://127.0.0.1:8000/api/consultation/schedule/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: consultation.name,
+          email: consultation.email,
+          phone: consultation.phone,
+          company: consultation.company,
+          project_type: consultation.projectType,
+          preferred_date: consultation.preferredDate.toISOString().split('T')[0],
+          preferred_time: consultation.preferredTime,
+          additional_notes: consultation.additionalNotes
+        }),
+      });
 
-      // Create lead in CRM
-      const leadId = await this.crmService.createLead(consultation);
+      const result = await response.json();
 
-      // Send confirmation email to customer
-      await this.emailService.sendConsultationConfirmation(consultation);
-
-      // Send notification to admin
-      await this.emailService.sendAdminNotification(consultation);
-
-      return {
-        success: true,
-        eventId,
-        leadId
-      };
+      if (result.success) {
+        return {
+          success: true,
+          eventId: result.consultation_id?.toString()
+        };
+      } else {
+        return {
+          success: false,
+          error: result.error || 'Failed to schedule consultation'
+        };
+      }
     } catch (error) {
       console.error('Error scheduling consultation:', error);
       return {

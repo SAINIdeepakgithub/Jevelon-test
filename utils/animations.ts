@@ -1,44 +1,129 @@
-export const containerVariants = {
+import { prefersReducedMotion } from './performance';
+import { easeOut } from 'framer-motion';
+
+// Optimized animation variants with reduced motion support
+export const fadeInUp = {
+  hidden: { 
+    opacity: 0, 
+    y: prefersReducedMotion() ? 0 : 20 
+  },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: {
+      duration: prefersReducedMotion() ? 0.1 : 0.4,
+      ease: easeOut
+    }
+  }
+};
+
+export const fadeIn = {
+  hidden: { opacity: 0 },
+  visible: { 
+    opacity: 1,
+    transition: {
+      duration: prefersReducedMotion() ? 0.1 : 0.3,
+      ease: easeOut
+    }
+  }
+};
+
+export const scaleIn = {
+  hidden: { 
+    scale: prefersReducedMotion() ? 1 : 0.8, 
+    opacity: 0 
+  },
+  visible: { 
+    scale: 1, 
+    opacity: 1,
+    transition: {
+      duration: prefersReducedMotion() ? 0.1 : 0.3,
+      ease: easeOut
+    }
+  }
+};
+
+export const staggerContainer = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
     transition: {
-      delayChildren: 0.3,
-      staggerChildren: 0.1
+      delayChildren: prefersReducedMotion() ? 0 : 0.1,
+      staggerChildren: prefersReducedMotion() ? 0 : 0.1
     }
   }
 };
 
+// Legacy exports for backward compatibility
+export const containerVariants = staggerContainer;
+
 export const itemVariants = {
-  hidden: { y: 20, opacity: 0 },
+  hidden: { y: prefersReducedMotion() ? 0 : 20, opacity: 0 },
   visible: {
     y: 0,
     opacity: 1,
     transition: {
-      duration: 0.6
+      duration: prefersReducedMotion() ? 0.1 : 0.4,
+      ease: easeOut
     }
   }
 };
 
-export const iconVariants = {
-  hidden: { scale: 0, opacity: 0 },
-  visible: {
-    scale: 1,
+export const slideInLeft = {
+  hidden: { 
+    x: prefersReducedMotion() ? 0 : -50, 
+    opacity: 0 
+  },
+  visible: { 
+    x: 0, 
     opacity: 1,
     transition: {
-      type: "spring",
-      stiffness: 200,
-      damping: 10
+      duration: prefersReducedMotion() ? 0.1 : 0.4,
+      ease: easeOut
     }
   }
 };
 
+export const slideInRight = {
+  hidden: { 
+    x: prefersReducedMotion() ? 0 : 50, 
+    opacity: 0 
+  },
+  visible: { 
+    x: 0, 
+    opacity: 1,
+    transition: {
+      duration: prefersReducedMotion() ? 0.1 : 0.4,
+      ease: easeOut
+    }
+  }
+};
+
+// Hover animations (disabled for reduced motion)
+export const hoverScale = prefersReducedMotion() 
+  ? {} 
+  : { scale: 1.02 };
+
+export const hoverLift = prefersReducedMotion() 
+  ? {} 
+  : { y: -2 };
+
+export const hoverRotate = prefersReducedMotion() 
+  ? {} 
+  : { rotate: 5 };
+
 export const getColorClasses = (color: string) => {
-  const colors: Record<string, { bg: string; border: string; text: string; button: string }> = {
-    blue: { bg: "bg-blue-50/10", border: "border-blue-500/20", text: "text-blue-400", button: "bg-blue-600 hover:bg-blue-500" },
-    green: { bg: "bg-green-50/10", border: "border-green-500/20", text: "text-green-400", button: "bg-green-600 hover:bg-green-500" },
-    purple: { bg: "bg-purple-50/10", border: "border-purple-500/20", text: "text-purple-400", button: "bg-purple-600 hover:bg-purple-500" },
-    orange: { bg: "bg-orange-50/10", border: "border-orange-500/20", text: "text-orange-400", button: "bg-orange-600 hover:bg-orange-500" }
+  const colorMap: { [key: string]: string } = {
+    blue: "bg-blue-500/20 text-blue-400 border-blue-500/30",
+    green: "bg-green-500/20 text-green-400 border-green-500/30",
+    purple: "bg-purple-500/20 text-purple-400 border-purple-500/30",
+    orange: "bg-orange-500/20 text-orange-400 border-orange-500/30",
+    pink: "bg-pink-500/20 text-pink-400 border-pink-500/30",
+    red: "bg-red-500/20 text-red-400 border-red-500/30",
+    yellow: "bg-yellow-500/20 text-yellow-400 border-yellow-500/30",
+    indigo: "bg-indigo-500/20 text-indigo-400 border-indigo-500/30",
+    teal: "bg-teal-500/20 text-teal-400 border-teal-500/30",
+    cyan: "bg-cyan-500/20 text-cyan-400 border-cyan-500/30",
   };
-  return colors[color] || colors.blue;
+  return colorMap[color] || colorMap.blue;
 };

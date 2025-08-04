@@ -46,7 +46,7 @@ export default function TermsOfServicePage() {
             Terms of <span className="text-blue-400">Service</span>
           </h1>
           <p className="text-muted-foreground">
-            Last updated: January 24, 2025
+            Last updated: August 01, 2025
           </p>
         </motion.div>
 

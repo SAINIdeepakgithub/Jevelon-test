@@ -42,7 +42,7 @@ export default function CookiePolicyPage() {
             Cookie <span className="text-blue-400">Policy</span>
           </h1>
           <p className="text-muted-foreground">
-            Last updated: January 24, 2025
+            Last updated: August 01, 2025
           </p>
         </motion.div>
 

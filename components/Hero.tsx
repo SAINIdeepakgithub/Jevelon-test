@@ -9,8 +9,8 @@ export default function Hero() {
     visible: {
       opacity: 1,
       transition: {
-        delayChildren: 0.3,
-        staggerChildren: 0.2
+        delayChildren: 0.1,
+        staggerChildren: 0.1
       }
     }
   };
@@ -21,7 +21,7 @@ export default function Hero() {
       y: 0,
       opacity: 1,
       transition: {
-        duration: 0.6
+        duration: 0.4
       }
     }
   };
@@ -33,18 +33,18 @@ export default function Hero() {
       opacity: 1,
       transition: {
         type: "spring" as const,
-        stiffness: 200,
-        damping: 10
+        stiffness: 150,
+        damping: 15
       }
     }
   };
 
   return (
     <section id="home" className="pt-32 pb-20 bg-gradient-to-br from-background via-background to-blue-950/20 relative overflow-hidden">
-      {/* Animated background elements */}
+      {/* Simplified background elements */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-500/5 rounded-full blur-3xl"></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-500/5 rounded-full blur-3xl"></div>
       </div>
 
       <div className="w-full px-4 sm:px-6 lg:px-8 relative">
@@ -60,24 +60,9 @@ export default function Hero() {
               className="text-4xl md:text-6xl font-bold text-foreground mb-8 leading-relaxed overflow-visible pb-8"
             >
               Empowering Your Business with 
-              <motion.span 
-                className="text-blue-400 inline-block align-baseline pb-2"
-                initial={{ backgroundPosition: "0% 50%" }}
-                animate={{ backgroundPosition: "100% 50%" }}
-                transition={{ duration: 3, repeat: Infinity, repeatType: "reverse" }}
-                style={{
-                  background: "linear-gradient(-45deg, #3b82f6, #60a5fa, #93c5fd, #3b82f6)",
-                  backgroundSize: "400% 400%",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                  overflow: 'visible',
-                  display: 'inline-block',
-                  verticalAlign: 'baseline',
-                  lineHeight: '1.2',
-                  paddingBottom: '0.5rem'
-                }}
-              > Cutting-Edge Technology</motion.span>
+              <span className="text-blue-400 inline-block align-baseline pb-2">
+                Cutting-Edge Technology
+              </span>
             </motion.h1>
             
             <motion.p 
@@ -93,21 +78,20 @@ export default function Hero() {
               className="flex flex-col sm:flex-row gap-4 justify-center mb-12"
             >
               <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
               >
-                <Button size="lg" className="bg-blue-600 hover:bg-blue-500 text-white relative overflow-hidden group">
-                  <span className="relative z-10 flex items-center">
+                <Button size="lg" className="bg-blue-600 hover:bg-blue-500 text-white">
+                  <span className="flex items-center">
                     Start Your Project
-                    <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                    <ArrowRight className="ml-2 h-5 w-5" />
                   </span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-500 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
                 </Button>
               </motion.div>
               
               <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
               >
                 <Button 
                   size="lg" 
@@ -144,9 +128,8 @@ export default function Hero() {
                   <motion.div
                     variants={iconVariants}
                     whileHover={{ 
-                      scale: 1.1,
-                      rotate: [0, -5, 5, 0],
-                      transition: { duration: 0.3 }
+                      scale: 1.05,
+                      transition: { duration: 0.2 }
                     }}
                     className="flex flex-col items-center space-y-2 group cursor-pointer"
                   >

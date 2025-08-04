@@ -71,4 +71,4 @@ export const supportChannels = [
     responseTime: "< 24 hours",
     color: "purple"
   }
-];
+];                                  
