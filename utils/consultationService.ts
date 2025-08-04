@@ -107,7 +107,8 @@ export class ConsultationService {
       }
 
       // Send to Django API
-      const response = await fetch('http://127.0.0.1:8000/api/consultation/schedule/', {
+      const apiUrl = (import.meta as any).env?.VITE_API_URL || 'http://localhost:8000';
+      const response = await fetch(`${apiUrl}/api/consultation/schedule/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

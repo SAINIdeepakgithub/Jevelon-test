@@ -16,16 +16,19 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { useState } from "react";
+import { supportService, SupportTicket } from "../utils/supportService";
 
 export default function SupportPage() {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<SupportTicket>({
     name: "",
     email: "",
-    priority: "",
-    category: "",
+    priority: "medium",
+    category: "other",
     subject: "",
     message: ""
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState<{ type: 'success' | 'error', message: string } | null>(null);
 
   const supportPlans = [
     {
@@ -80,7 +83,7 @@ export default function SupportPage() {
       icon: Phone,
       title: "Phone Support",
       description: "Speak directly with our technical experts",
-      availability: "Mon-Fri 9AM-6PM EST",
+      availability: "Mon-Fri 9AM-6PM IST",
       responseTime: "Immediate",
       color: "green"
     },
@@ -94,18 +97,41 @@ export default function SupportPage() {
     }
   ];
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Support ticket submitted:", formData);
-    alert("Support ticket submitted successfully! We'll get back to you soon.");
-    setFormData({
-      name: "",
-      email: "",
-      priority: "",
-      category: "",
-      subject: "",
-      message: ""
-    });
+    setIsSubmitting(true);
+    setSubmitMessage(null);
+    
+    try {
+      const response = await supportService.submitSupportTicket(formData);
+      
+      if (response.success) {
+        setSubmitMessage({
+          type: 'success',
+          message: `Support ticket submitted successfully! Ticket ID: ${response.ticket_id}. We'll get back to you soon.`
+        });
+        setFormData({
+          name: "",
+          email: "",
+          priority: "medium",
+          category: "other",
+          subject: "",
+          message: ""
+        });
+      } else {
+        setSubmitMessage({
+          type: 'error',
+          message: response.error || 'Failed to submit support ticket. Please try again.'
+        });
+      }
+    } catch (error) {
+      setSubmitMessage({
+        type: 'error',
+        message: 'An error occurred while submitting the ticket. Please try again.'
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleInputChange = (field: string, value: string) => {
@@ -394,9 +420,32 @@ export default function SupportPage() {
                   />
                 </div>
 
-                <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-500 text-white">
-                  Submit Ticket
-                  <ArrowRight className="ml-2 h-4 w-4" />
+                {submitMessage && (
+                  <div className={`p-4 rounded-lg ${
+                    submitMessage.type === 'success' 
+                      ? 'bg-green-100 border border-green-400 text-green-700' 
+                      : 'bg-red-100 border border-red-400 text-red-700'
+                  }`}>
+                    {submitMessage.message}
+                  </div>
+                )}
+                
+                <Button 
+                  type="submit" 
+                  className="w-full bg-blue-600 hover:bg-blue-500 text-white"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? (
+                    <>
+                      <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                      Submitting...
+                    </>
+                  ) : (
+                    <>
+                      Submit Ticket
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </>
+                  )}
                 </Button>
               </form>
             </CardContent>

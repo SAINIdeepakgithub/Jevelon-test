@@ -81,7 +81,16 @@ export default function Hero() {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
-                <Button size="lg" className="bg-blue-600 hover:bg-blue-500 text-white">
+                <Button 
+                  size="lg" 
+                  className="bg-blue-600 hover:bg-blue-500 text-white"
+                  onClick={() => {
+                    const contactSection = document.querySelector('#contact');
+                    if (contactSection) {
+                      contactSection.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }}
+                >
                   <span className="flex items-center">
                     Start Your Project
                     <ArrowRight className="ml-2 h-5 w-5" />
