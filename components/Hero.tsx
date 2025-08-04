@@ -61,7 +61,7 @@ export default function Hero() {
             >
               Empowering Your Business with 
               <span className="text-blue-400 inline-block align-baseline pb-2">
-                Cutting-Edge Technology
+                 Cutting-Edge Technology
               </span>
             </motion.h1>
             

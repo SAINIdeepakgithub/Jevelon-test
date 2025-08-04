@@ -46,7 +46,6 @@ function AppContent() {
             <Route path="/support" element={<SupportPage />} />
             <Route path="/careers" element={<CareersPage />} />
             <Route path="/team" element={<TeamPage />} />
-            <Route path="/#contact" element={<HomePage />} />
             <Route path="/privacy" element={<PrivacyPolicyPage />} />
             <Route path="/terms" element={<TermsOfServicePage />} />
             <Route path="/cookies" element={<CookiePolicyPage />} />

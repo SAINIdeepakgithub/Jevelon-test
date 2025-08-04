@@ -19,7 +19,14 @@ export default function Header() {
   ];
 
   const handleNavClick = (href: string) => {
-    if (href.startsWith("#")) {
+    if (href === "/") {
+      // If clicking Home and already on home page, scroll to top
+      if (location.pathname === "/") {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } else {
+        navigate("/");
+      }
+    } else if (href.startsWith("#")) {
       if (location.pathname !== "/") {
         navigate(`/${href}`);
       } else {
@@ -64,13 +71,17 @@ export default function Header() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 + index * 0.1 }}
               >
-                {item.href.startsWith("#") ? (
+                {(item.href.startsWith("#") || item.href === "/") ? (
                   <button
                     onClick={() => handleNavClick(item.href)}
-                    className="text-foreground hover:text-blue-400 transition-colors duration-200 relative group"
+                    className={`text-lg text-foreground hover:text-blue-400 transition-colors duration-200 relative group ${
+                      location.pathname === item.href ? 'text-blue-400' : ''
+                    }`}
                   >
                     {item.name}
-                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-400 transition-all duration-200 group-hover:w-full"></span>
+                    <span className={`absolute -bottom-1 left-0 h-0.5 bg-blue-400 transition-all duration-200 group-hover:w-full ${
+                      location.pathname === item.href ? 'w-full' : 'w-0'
+                    }`}></span>
                   </button>
                 ) : (
                   <Link
@@ -145,7 +156,7 @@ export default function Header() {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.1 }}
                   >
-                    {item.href.startsWith("#") ? (
+                    {(item.href.startsWith("#") || item.href === "/") ? (
                       <button
                         onClick={() => handleNavClick(item.href)}
                         className="block w-full px-3 py-3 text-left text-foreground hover:text-blue-400 hover:bg-gray-50 dark:hover:bg-gray-800 transition-all duration-200 rounded-lg"

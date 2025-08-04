@@ -19,17 +19,23 @@ class NewsService {
 
   async fetchTechNews(): Promise<NewsArticle[]> {
     try {
+      // More specific technology-focused query to ensure we only get tech news
       const response = await axios.get(`${this.baseUrl}/everything`, {
         params: {
-          q: 'technology OR software OR programming OR web development OR artificial intelligence OR AI OR machine learning',
+          q: '(technology OR software OR programming OR web development OR mobile development OR artificial intelligence OR AI OR machine learning OR cloud computing OR DevOps OR cybersecurity OR blockchain OR data science OR software engineering) AND NOT (politics OR sports OR entertainment OR celebrity OR fashion OR food OR travel)',
           language: 'en',
           sortBy: 'publishedAt',
-          pageSize: 20,
+          pageSize: 30, // Increased to have more articles to filter from
           apiKey: this.apiKey
         }
       });
 
-      return this.transformNewsData(response.data.articles);
+      // Filter articles to ensure they are truly technology-related
+      const techArticles = response.data.articles.filter((article: any) => 
+        this.isTechnologyArticle(article.title, article.description, article.content)
+      );
+
+      return this.transformNewsData(techArticles.slice(0, 20)); // Return top 20 tech articles
     } catch (error) {
       console.error('Error fetching tech news:', error);
       return this.getMockTechNews(); // Fallback to mock data if API fails
@@ -49,6 +55,46 @@ class NewsService {
       source: article.source.name,
       featured: index === 0 // First article is featured
     }));
+  }
+
+  private isTechnologyArticle(title: string, description: string, content: string): boolean {
+    const text = (title + ' ' + description + ' ' + content).toLowerCase();
+    
+    // Technology-related keywords
+    const techKeywords = [
+      'technology', 'software', 'programming', 'development', 'coding', 'computer',
+      'web', 'mobile', 'app', 'application', 'artificial intelligence', 'ai', 'machine learning',
+      'cloud', 'aws', 'azure', 'google cloud', 'devops', 'cybersecurity', 'blockchain',
+      'data science', 'database', 'api', 'framework', 'library', 'algorithm', 'code',
+      'frontend', 'backend', 'fullstack', 'react', 'angular', 'vue', 'node', 'python',
+      'javascript', 'typescript', 'java', 'c++', 'c#', 'php', 'ruby', 'go', 'rust',
+      'docker', 'kubernetes', 'git', 'github', 'gitlab', 'deployment', 'ci/cd',
+      'microservices', 'serverless', 'saas', 'startup', 'tech', 'digital', 'innovation',
+      'automation', 'robotics', 'iot', 'internet of things', 'virtual reality', 'vr',
+      'augmented reality', 'ar', 'big data', 'analytics', 'machine learning', 'deep learning',
+      'neural network', 'algorithm', 'open source', 'open-source', 'startup', 'tech company'
+    ];
+    
+    // Non-technology keywords to exclude
+    const nonTechKeywords = [
+      'politics', 'political', 'election', 'president', 'government', 'congress',
+      'sports', 'football', 'basketball', 'baseball', 'soccer', 'tennis', 'olympics',
+      'entertainment', 'celebrity', 'movie', 'film', 'music', 'actor', 'actress',
+      'fashion', 'clothing', 'style', 'beauty', 'cosmetics', 'makeup',
+      'food', 'restaurant', 'cooking', 'recipe', 'chef', 'dining',
+      'travel', 'tourism', 'vacation', 'hotel', 'airline', 'destination',
+      'health', 'medical', 'hospital', 'doctor', 'patient', 'disease',
+      'finance', 'banking', 'investment', 'stock', 'market', 'economy'
+    ];
+    
+    // Check if article contains technology keywords
+    const hasTechKeywords = techKeywords.some(keyword => text.includes(keyword));
+    
+    // Check if article contains non-technology keywords (to exclude)
+    const hasNonTechKeywords = nonTechKeywords.some(keyword => text.includes(keyword));
+    
+    // Article is technology-related if it has tech keywords and doesn't have non-tech keywords
+    return hasTechKeywords && !hasNonTechKeywords;
   }
 
   private categorizeArticle(title: string, description: string): string {
@@ -153,6 +199,50 @@ class NewsService {
         image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&h=400&fit=crop',
         url: 'https://example.com/typescript-5-3',
         source: 'TypeScript Blog'
+      },
+      {
+        id: '7',
+        title: 'Docker Announces New Container Security Features',
+        excerpt: 'Docker has unveiled enhanced security features for containerized applications, including improved vulnerability scanning, runtime protection, and compliance monitoring tools.',
+        category: 'DevOps',
+        date: 'Dec 10, 2024',
+        readTime: '4 min read',
+        image: 'https://images.unsplash.com/photo-1605745341112-85968b19335b?w=800&h=400&fit=crop',
+        url: 'https://example.com/docker-security',
+        source: 'Docker Blog'
+      },
+      {
+        id: '8',
+        title: 'Next.js 15 Introduces App Router Improvements',
+        excerpt: 'Next.js 15 brings significant improvements to the App Router, including better performance, enhanced developer experience, and new features for building modern web applications.',
+        category: 'Web Development',
+        date: 'Dec 9, 2024',
+        readTime: '6 min read',
+        image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&h=400&fit=crop',
+        url: 'https://example.com/nextjs-15',
+        source: 'Vercel Blog'
+      },
+      {
+        id: '9',
+        title: 'AWS Lambda Introduces Custom Runtime Support',
+        excerpt: 'Amazon Web Services has announced enhanced custom runtime support for Lambda functions, enabling developers to use any programming language or framework for serverless applications.',
+        category: 'Cloud Services',
+        date: 'Dec 8, 2024',
+        readTime: '5 min read',
+        image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&h=400&fit=crop',
+        url: 'https://example.com/aws-lambda-runtime',
+        source: 'AWS Blog'
+      },
+      {
+        id: '10',
+        title: 'GitHub Copilot Gets Advanced Code Generation Features',
+        excerpt: 'GitHub has released new features for Copilot, including advanced code generation, better context understanding, and improved integration with popular IDEs and development tools.',
+        category: 'Technology',
+        date: 'Dec 7, 2024',
+        readTime: '4 min read',
+        image: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&h=400&fit=crop',
+        url: 'https://example.com/github-copilot-features',
+        source: 'GitHub Blog'
       }
     ];
   }

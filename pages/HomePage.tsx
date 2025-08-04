@@ -8,7 +8,9 @@ import Contact from "../components/Contact";
 
 export default function HomePage() {
   const location = useLocation();
+
   useEffect(() => {
+    // Handle hash-based navigation
     if (location.hash) {
       const el = document.querySelector(location.hash);
       if (el) {
@@ -17,7 +19,8 @@ export default function HomePage() {
         }, 100);
       }
     }
-  }, [location]);
+  }, [location.hash]);
+
   return (
     <>
       <Hero />

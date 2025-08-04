@@ -48,9 +48,9 @@ export default function BlogPage() {
     <div className="pt-16 pb-20 bg-background min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <PageHeader
-          title="Tech"
-          highlight="Insights"
-          subtitle="Stay updated with the latest trends, insights, and best practices in software development and technology."
+          title="Technology"
+          highlight="News"
+          subtitle="Stay updated with the latest technology news, software development trends, and tech industry insights. All articles are curated to focus exclusively on technology topics."
         >
           <div className="max-w-2xl mx-auto space-y-6">
             <div className="relative">
@@ -81,7 +81,7 @@ export default function BlogPage() {
         {loading ? (
           <div className="flex justify-center items-center py-20">
             <Loader2 className="h-8 w-8 animate-spin text-blue-400" />
-            <span className="ml-2 text-muted-foreground">Loading latest tech news...</span>
+            <span className="ml-2 text-muted-foreground">Loading latest technology news...</span>
           </div>
         ) : (
           <>
