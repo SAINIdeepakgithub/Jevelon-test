@@ -113,6 +113,11 @@ If you get a 502 error for the admin endpoint:
 4. **Create Admin User**: Run `python manage.py createsuperuser` in Render shell
 5. **Check Static Files**: Ensure static files are collected properly
 
+#### 400 Bad Request Error (Favicon)
+If you get a 400 error for `/favicon.ico`:
+- This is now fixed with a favicon handler
+- The error was harmless but has been resolved
+
 **Quick Debug Steps:**
 ```bash
 # Check the health endpoint for configuration info
@@ -123,6 +128,9 @@ curl https://jevelon.onrender.com/test/
 
 # Run debug script in Render shell
 python debug_admin.py
+
+# Run status check locally
+python check_status.py
 ```
 
 ---

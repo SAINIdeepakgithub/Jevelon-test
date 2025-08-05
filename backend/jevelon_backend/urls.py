@@ -63,6 +63,7 @@ def favicon_handler(request):
 urlpatterns = [
     path('', health_check, name='health_check'),
     path('test/', test_endpoint, name='test_endpoint'),
+    path('favicon.ico', favicon_handler, name='favicon'),
     path('admin/', admin.site.urls),
     path('api/contact/', include('contact.urls')),
     path('api/consultation/', include('consultation.urls')),
