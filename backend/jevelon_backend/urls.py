@@ -17,11 +17,17 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.http import JsonResponse
+from django.conf import settings
+import os
 
 def health_check(request):
     return JsonResponse({
         'status': 'ok',
         'message': 'Jevelon Backend is running',
+        'debug': settings.DEBUG,
+        'allowed_hosts': settings.ALLOWED_HOSTS,
+        'cors_origins': settings.CORS_ALLOWED_ORIGINS,
+        'database_configured': bool(settings.DATABASES['default']['NAME']),
         'endpoints': {
             'admin': '/admin/',
             'contact': '/api/contact/submit/',
@@ -30,8 +36,17 @@ def health_check(request):
         }
     })
 
+def test_endpoint(request):
+    return JsonResponse({
+        'status': 'success',
+        'message': 'Test endpoint working',
+        'method': request.method,
+        'headers': dict(request.headers)
+    })
+
 urlpatterns = [
     path('', health_check, name='health_check'),
+    path('test/', test_endpoint, name='test_endpoint'),
     path('admin/', admin.site.urls),
     path('api/contact/', include('contact.urls')),
     path('api/consultation/', include('consultation.urls')),

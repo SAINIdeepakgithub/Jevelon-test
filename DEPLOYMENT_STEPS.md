@@ -35,7 +35,7 @@ This guide will walk you through deploying your Jevelon Technologies website to 
 Fill in these details:
 
 **Basic Settings:**
-- **Name**: `jevelon-backend`
+- **Name**: `jevelon`
 - **Environment**: `Python 3`
 - **Region**: Same as your database
 - **Branch**: `main`
@@ -53,11 +53,18 @@ DEBUG=False
 SECRET_KEY=your-super-secret-key-here-make-it-long-and-random
 DATABASE_URL=postgresql://username:password@host:port/database_name
 SENDGRID_API_KEY=your-sendgrid-api-key
-DEFAULT_FROM_EMAIL=hello@jevelon.com
-ADMIN_EMAIL=admin@jevelon.com
-ALLOWED_HOSTS=your-backend-domain.onrender.com
+DEFAULT_FROM_EMAIL=jevelonemmisions@gmail.com
+ADMIN_EMAIL=jevelonemmisions@gmail.com
+ALLOWED_HOSTS=.onrender.com
 CORS_ALLOWED_ORIGINS=https://your-frontend-domain.vercel.app
 ```
+
+**Important Notes:**
+- **SECRET_KEY**: Generate at [djecrety.ir](https://djecrety.ir/)
+- **DATABASE_URL**: Use the Internal Database URL from Step 2
+- **SENDGRID_API_KEY**: Get from [SendGrid](https://sendgrid.com/)
+- **ALLOWED_HOSTS**: Use `.onrender.com` (includes all Render subdomains)
+- **CORS_ALLOWED_ORIGINS**: Will be your Vercel URL (we'll get this later)
 
 **Important:**
 - **SECRET_KEY**: Generate at [djecrety.ir](https://djecrety.ir/)
@@ -69,7 +76,7 @@ CORS_ALLOWED_ORIGINS=https://your-frontend-domain.vercel.app
 ### Step 6: Deploy
 1. Click **"Create Web Service"**
 2. Wait for build to complete (2-5 minutes)
-3. Your backend URL will be: `https://jevelon-backend.onrender.com`
+3. Your backend URL will be: `https://jevelon.onrender.com`
 
 ### Step 7: Create Admin User
 1. Go to your Render dashboard
@@ -81,8 +88,29 @@ python manage.py createsuperuser
 ```
 
 ### Step 8: Test Backend
-1. Test admin: `https://jevelon-backend.onrender.com/admin/`
-2. Test API: `https://jevelon-backend.onrender.com/api/contact/`
+1. Test health check: `https://jevelon.onrender.com/`
+2. Test endpoint: `https://jevelon.onrender.com/test/`
+3. Test admin: `https://jevelon.onrender.com/admin/`
+4. Test API: `https://jevelon.onrender.com/api/contact/`
+
+### Step 9: Troubleshooting 400 Bad Request
+
+If you get a 400 Bad Request error, check these common issues:
+
+1. **Environment Variables**: Ensure all required environment variables are set in Render
+2. **Database Connection**: Verify DATABASE_URL is correct and database is accessible
+3. **CORS Issues**: Check if your frontend domain is in CORS_ALLOWED_ORIGINS
+4. **Secret Key**: Ensure SECRET_KEY is properly set (not DJANGO_SECRET_KEY)
+5. **Debug Mode**: Set DEBUG=True temporarily to see detailed error messages
+
+**Quick Debug Steps:**
+```bash
+# Check the health endpoint for configuration info
+curl https://jevelon.onrender.com/
+
+# Check if test endpoint works
+curl https://jevelon.onrender.com/test/
+```
 
 ---
 
@@ -109,7 +137,7 @@ python manage.py createsuperuser
 Click **"Environment Variables"** and add:
 
 ```env
-VITE_API_URL=https://jevelon-backend.onrender.com
+VITE_API_URL=https://jevelon.onrender.com
 VITE_SITE_URL=https://your-frontend-domain.vercel.app
 ```
 
@@ -176,8 +204,8 @@ CORS_ALLOWED_ORIGINS=https://your-project-name.vercel.app
 # Go to Vercel dashboard → Functions tab
 
 # Test API endpoints
-curl https://jevelon-backend.onrender.com/api/contact/
-curl https://jevelon-backend.onrender.com/api/support/tickets/
+curl https://jevelon.onrender.com/api/contact/
+curl https://jevelon.onrender.com/api/support/tickets/
 ```
 
 ---
@@ -214,8 +242,8 @@ curl https://jevelon-backend.onrender.com/api/support/tickets/
 After deployment, your URLs will be:
 
 - **Frontend**: `https://your-project-name.vercel.app`
-- **Backend**: `https://jevelon-backend.onrender.com`
-- **Admin**: `https://jevelon-backend.onrender.com/admin/`
+- **Backend**: `https://jevelon.onrender.com`
+- **Admin**: `https://jevelon.onrender.com/admin/`
 
 ---
 
