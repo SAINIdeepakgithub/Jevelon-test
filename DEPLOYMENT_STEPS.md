@@ -147,12 +147,18 @@ python check_status.py
 2. Import your GitHub repository
 3. Select the repository: `Jevelon Technologies Company Website`
 
-### Step 3: Configure Project
+### Step 3: Configure Project Settings
+Fill in these details:
+
 **Framework Preset**: `Vite`
 **Root Directory**: `./` (leave empty)
 **Build Command**: `npm run build`
 **Output Directory**: `dist`
 **Install Command**: `npm install`
+
+**Advanced Settings** (optional):
+- **Node.js Version**: `18.x` (or latest LTS)
+- **Override**: Leave as default
 
 ### Step 4: Set Environment Variables
 Click **"Environment Variables"** and add:
@@ -162,7 +168,9 @@ VITE_API_URL=https://jevelon.onrender.com
 VITE_SITE_URL=https://your-frontend-domain.vercel.app
 ```
 
-**Note**: Replace `your-frontend-domain.vercel.app` with your actual Vercel domain.
+**Important Notes:**
+- **VITE_API_URL**: Points to your Render backend
+- **VITE_SITE_URL**: Will be your Vercel domain (we'll update this after deployment)
 
 ### Step 5: Deploy
 1. Click **"Deploy"**
@@ -171,11 +179,20 @@ VITE_SITE_URL=https://your-frontend-domain.vercel.app
 
 ### Step 6: Update Backend CORS
 1. Go back to Render dashboard
-2. Update the `CORS_ALLOWED_ORIGINS` environment variable:
+2. Click on your `jevelon` service
+3. Go to **"Environment"** tab
+4. Update the `CORS_ALLOWED_ORIGINS` environment variable:
 ```env
 CORS_ALLOWED_ORIGINS=https://your-project-name.vercel.app
 ```
-3. Redeploy the backend service
+5. Click **"Save Changes"** and redeploy
+
+### Step 7: Test Frontend Integration
+1. Visit your Vercel URL
+2. Test the contact form
+3. Test the support form
+4. Test navigation between pages
+5. Check mobile responsiveness
 
 ---
 

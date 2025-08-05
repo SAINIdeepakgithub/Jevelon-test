@@ -13,15 +13,20 @@ dist-ssr
 *.local
 
 # Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
+.vscode/
+.idea/
 .DS_Store
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+
+# Backend specific
+backend/db.sqlite3
+backend/django.log
+backend/venv/
+backend/staticfiles/
 
 # Environment variables
 .env
