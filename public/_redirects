@@ -1,0 +1,5 @@
+# Redirect from old domain to new domain
+https://jevelontechnologies.vercel.app/* https://jevelontechnologies-git-master-nishchal-sharma-s-projects.vercel.app/:splat 301!
+
+# Handle SPA routing
+/*    /index.html   200 
