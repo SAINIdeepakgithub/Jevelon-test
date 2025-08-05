@@ -14,7 +14,7 @@ export interface NewsArticle {
 }
 
 class NewsService {
-  private apiKey = '46b52fbe2af942349ef8789253545bf1'; // You'll need to get a free API key from https://newsapi.org/
+  private apiKey = import.meta.env.VITE_NEWS_API_KEY || '46b52fbe2af942349ef8789253545bf1'; // Use environment variable
   private baseUrl = 'https://newsapi.org/v2';
 
   async fetchTechNews(): Promise<NewsArticle[]> {
@@ -31,7 +31,7 @@ class NewsService {
       });
 
       // Filter articles to ensure they are truly technology-related
-      const techArticles = response.data.articles.filter((article: any) => 
+      const techArticles = response.data.articles.filter((article: { title: string; description: string; content: string }) => 
         this.isTechnologyArticle(article.title, article.description, article.content)
       );
 
@@ -42,7 +42,7 @@ class NewsService {
     }
   }
 
-  private transformNewsData(articles: any[]): NewsArticle[] {
+  private transformNewsData(articles: Array<{ title: string; description?: string; content?: string; publishedAt: string; urlToImage?: string; url: string; source: { name: string } }>): NewsArticle[] {
     return articles.map((article, index) => ({
       id: index.toString(),
       title: article.title,

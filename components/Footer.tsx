@@ -1,5 +1,5 @@
 import { Separator } from "./ui/separator";
-import { Facebook, Linkedin, Twitter, Mail,Instagram } from "lucide-react";
+import { Linkedin, Twitter, Mail, Instagram } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useScrollToTop } from "../utils/useScrollToTop";

@@ -5,10 +5,22 @@ import { Textarea } from "./ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "./ui/dialog";
 import { DatePicker } from "./ui/date-picker";
-import { Mail, Phone, MapPin, Clock, Calendar as CalendarIcon } from "lucide-react";
+import { Mail, Phone, MapPin, Clock, Calendar as CalendarIcon, Loader2 } from "lucide-react";
 import { useState } from "react";
 import { format } from "date-fns";
 import { ConsultationService, ConsultationRequest } from "../utils/consultationService";
+
+interface FormErrors {
+  name?: string;
+  email?: string;
+  service?: string;
+  message?: string;
+  phone?: string;
+  company?: string;
+  projectType?: string;
+  preferredDate?: string;
+  preferredTime?: string;
+}
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -30,12 +42,98 @@ export default function Contact() {
   });
 
   const [isConsultationModalOpen, setIsConsultationModalOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isConsultationSubmitting, setIsConsultationSubmitting] = useState(false);
+  const [formErrors, setFormErrors] = useState<FormErrors>({});
+  const [consultationErrors, setConsultationErrors] = useState<FormErrors>({});
+
+  // Validation functions
+  const validateEmail = (email: string): boolean => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const validatePhone = (phone: string): boolean => {
+    if (!phone) return true; // Phone is optional
+    const phoneRegex = /^\+?\d{1,3}\s?\d{10}$/;
+    return phoneRegex.test(phone.replace(/\s/g, ''));
+  };
+
+  const validateForm = (): boolean => {
+    const errors: FormErrors = {};
+
+    if (!formData.name.trim()) {
+      errors.name = "Name is required";
+    } else if (formData.name.trim().length < 2) {
+      errors.name = "Name must be at least 2 characters";
+    }
+
+    if (!formData.email.trim()) {
+      errors.email = "Email is required";
+    } else if (!validateEmail(formData.email)) {
+      errors.email = "Please enter a valid email address";
+    }
+
+    if (!formData.service.trim()) {
+      errors.service = "Please select a service";
+    }
+
+    if (!formData.message.trim()) {
+      errors.message = "Message is required";
+    } else if (formData.message.trim().length < 10) {
+      errors.message = "Message must be at least 10 characters";
+    }
+
+    setFormErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
+  const validateConsultationForm = (): boolean => {
+    const errors: FormErrors = {};
+
+    if (!consultationData.name.trim()) {
+      errors.name = "Name is required";
+    } else if (consultationData.name.trim().length < 2) {
+      errors.name = "Name must be at least 2 characters";
+    }
+
+    if (!consultationData.email.trim()) {
+      errors.email = "Email is required";
+    } else if (!validateEmail(consultationData.email)) {
+      errors.email = "Please enter a valid email address";
+    }
+
+    if (consultationData.phone && !validatePhone(consultationData.phone)) {
+      errors.phone = "Please enter a valid phone number with country code (e.g., +91 1234567890)";
+    }
+
+    if (!consultationData.projectType.trim()) {
+      errors.projectType = "Please select a project type";
+    }
+
+    if (!consultationData.preferredDate) {
+      errors.preferredDate = "Please select a preferred date";
+    }
+
+    if (!consultationData.preferredTime.trim()) {
+      errors.preferredTime = "Please select a preferred time";
+    }
+
+    setConsultationErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
+    if (!validateForm()) {
+      return;
+    }
+
+    setIsSubmitting(true);
+    
     try {
-      const apiUrl = (import.meta as any).env?.VITE_API_URL || 'http://localhost:8000';
+      const apiUrl = (import.meta as { env?: { VITE_API_URL?: string } }).env?.VITE_API_URL || 'http://localhost:8000';
       const response = await fetch(`${apiUrl}/api/contact/submit/`, {
         method: 'POST',
         headers: {
@@ -50,31 +148,26 @@ export default function Contact() {
         alert("Thank you for your message! We'll get back to you soon.");
         // Reset form
         setFormData({ name: "", email: "", service: "", message: "" });
+        setFormErrors({});
       } else {
         alert(`Error: ${result.error || 'Something went wrong'}`);
       }
     } catch (error) {
       console.error("Error submitting form:", error);
       alert("An error occurred while submitting your message. Please try again.");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   const handleConsultationSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!consultationData.preferredDate) {
-      alert("Please select a preferred date");
+    if (!validateConsultationForm()) {
       return;
     }
 
-    // Validate phone number format if provided
-    if (consultationData.phone) {
-      const phoneRegex = /^\+?\d{1,3}\s?\d{10}$/;
-      if (!phoneRegex.test(consultationData.phone.replace(/\s/g, ''))) {
-        alert("Please enter a valid phone number with country code (e.g., +91 1234567890)");
-        return;
-      }
-    }
+    setIsConsultationSubmitting(true);
 
     try {
       // Create consultation service instance
@@ -87,7 +180,7 @@ export default function Contact() {
         phone: consultationData.phone,
         company: consultationData.company,
         projectType: consultationData.projectType,
-        preferredDate: consultationData.preferredDate,
+        preferredDate: consultationData.preferredDate!,
         preferredTime: consultationData.preferredTime,
         additionalNotes: consultationData.additionalNotes
       };
@@ -98,7 +191,7 @@ export default function Contact() {
       if (result.success) {
         alert("Consultation scheduled successfully! We'll send you a confirmation email with meeting details.");
         
-        // Reset form and close modal
+        // Reset form
         setConsultationData({
           name: "",
           email: "",
@@ -109,22 +202,33 @@ export default function Contact() {
           preferredTime: "",
           additionalNotes: ""
         });
+        setConsultationErrors({});
         setIsConsultationModalOpen(false);
       } else {
-        alert(`Error scheduling consultation: ${result.error}`);
+        alert(`Error: ${result.error || 'Failed to schedule consultation'}`);
       }
     } catch (error) {
       console.error("Error scheduling consultation:", error);
       alert("An error occurred while scheduling your consultation. Please try again.");
+    } finally {
+      setIsConsultationSubmitting(false);
     }
   };
 
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
+    // Clear error when user starts typing
+    if (formErrors[field as keyof FormErrors]) {
+      setFormErrors(prev => ({ ...prev, [field]: undefined }));
+    }
   };
 
-  const handleConsultationInputChange = (field: string, value: any) => {
+  const handleConsultationInputChange = (field: string, value: string | Date | undefined) => {
     setConsultationData(prev => ({ ...prev, [field]: value }));
+    // Clear error when user starts typing
+    if (consultationErrors[field as keyof FormErrors]) {
+      setConsultationErrors(prev => ({ ...prev, [field]: undefined }));
+    }
   };
 
   const timeSlots = [
@@ -184,27 +288,33 @@ export default function Contact() {
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
                     <label htmlFor="name" className="block mb-2">Name *</label>
-                    <Input
-                      id="name"
-                      type="text"
-                      required
-                      value={formData.name}
-                      onChange={(e) => handleInputChange("name", e.target.value)}
-                      placeholder="Your Name"
-                      className="text-black"
-                    />
+                                          <Input
+                        id="name"
+                        type="text"
+                        required
+                        value={formData.name}
+                        onChange={(e) => handleInputChange("name", e.target.value)}
+                        placeholder="Your Name"
+                        className={`text-black ${formErrors.name ? 'border-red-500' : ''}`}
+                      />
+                      {formErrors.name && (
+                        <p className="text-red-500 text-sm mt-1">{formErrors.name}</p>
+                      )}
                   </div>
                   <div>
                     <label htmlFor="email" className="block mb-2">Email *</label>
-                    <Input
-                      id="email"
-                      type="email"
-                      required
-                      value={formData.email}
-                      onChange={(e) => handleInputChange("email", e.target.value)}
-                      placeholder="your@email.com"
-                      className="text-black"
-                    />
+                                          <Input
+                        id="email"
+                        type="email"
+                        required
+                        value={formData.email}
+                        onChange={(e) => handleInputChange("email", e.target.value)}
+                        placeholder="your@email.com"
+                        className={`text-black ${formErrors.email ? 'border-red-500' : ''}`}
+                      />
+                      {formErrors.email && (
+                        <p className="text-red-500 text-sm mt-1">{formErrors.email}</p>
+                      )}
                   </div>
                 </div>
                 
@@ -235,12 +345,22 @@ export default function Contact() {
                     value={formData.message}
                     onChange={(e) => handleInputChange("message", e.target.value)}
                     placeholder="Tell us about your project..."
-                    className="text-black"
+                    className={`text-black ${formErrors.message ? 'border-red-500' : ''}`}
                   />
+                  {formErrors.message && (
+                    <p className="text-red-500 text-sm mt-1">{formErrors.message}</p>
+                  )}
                 </div>
 
-                <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white">
-                  Send Message
+                <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white" disabled={isSubmitting}>
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Sending...
+                    </>
+                  ) : (
+                    "Send Message"
+                  )}
                 </Button>
               </form>
             </CardContent>
@@ -309,50 +429,59 @@ export default function Contact() {
                         <div className="space-y-4">
                           <div>
                             <label htmlFor="consultation-name" className="block mb-2 font-medium">Full Name *</label>
-                            <Input
-                              id="consultation-name"
-                              type="text"
-                              required
-                              value={consultationData.name}
-                              onChange={(e) => handleConsultationInputChange("name", e.target.value)}
-                              placeholder="Your full name"
-                              className="h-12 text-black"
-                            />
+                                                          <Input
+                                id="consultation-name"
+                                type="text"
+                                required
+                                value={consultationData.name}
+                                onChange={(e) => handleConsultationInputChange("name", e.target.value)}
+                                placeholder="Your full name"
+                                className={`h-12 text-black ${consultationErrors.name ? 'border-red-500' : ''}`}
+                              />
+                              {consultationErrors.name && (
+                                <p className="text-red-500 text-sm mt-1">{consultationErrors.name}</p>
+                              )}
                           </div>
                           <div>
                             <label htmlFor="consultation-email" className="block mb-2 font-medium">Email *</label>
-                            <Input
-                              id="consultation-email"
-                              type="email"
-                              required
-                              value={consultationData.email}
-                              onChange={(e) => handleConsultationInputChange("email", e.target.value)}
-                              placeholder="your@email.com"
-                              className="h-12 text-black"
-                            />
+                                                         <Input
+                               id="consultation-email"
+                               type="email"
+                               required
+                               value={consultationData.email}
+                               onChange={(e) => handleConsultationInputChange("email", e.target.value)}
+                               placeholder="your@email.com"
+                               className={`h-12 text-black ${consultationErrors.email ? 'border-red-500' : ''}`}
+                             />
+                             {consultationErrors.email && (
+                               <p className="text-red-500 text-sm mt-1">{consultationErrors.email}</p>
+                             )}
                           </div>
                         </div>
                         
                         <div className="space-y-4">
                           <div>
                             <label htmlFor="consultation-phone" className="block mb-2 font-medium">Phone Number</label>
-                            <Input
-                              id="consultation-phone"
-                              type="tel"
-                              value={consultationData.phone}
-                              onChange={(e) => {
-                                const value = e.target.value;
-                                // Only allow numbers, spaces, and + symbol
-                                const filteredValue = value.replace(/[^\d\s+]/g, '');
-                                // Limit to 15 characters (country code + 10 digits + spaces)
-                                if (filteredValue.length <= 15) {
-                                  handleConsultationInputChange("phone", filteredValue);
-                                }
-                              }}
-                              placeholder="+91 1234567890"
-                              className="h-12 text-black"
-                              maxLength={15}
-                            />
+                                                         <Input
+                               id="consultation-phone"
+                               type="tel"
+                               value={consultationData.phone}
+                               onChange={(e) => {
+                                 const value = e.target.value;
+                                 // Only allow numbers, spaces, and + symbol
+                                 const filteredValue = value.replace(/[^\d\s+]/g, '');
+                                 // Limit to 15 characters (country code + 10 digits + spaces)
+                                 if (filteredValue.length <= 15) {
+                                   handleConsultationInputChange("phone", filteredValue);
+                                 }
+                               }}
+                               placeholder="+91 1234567890"
+                               className={`h-12 text-black ${consultationErrors.phone ? 'border-red-500' : ''}`}
+                               maxLength={15}
+                             />
+                             {consultationErrors.phone && (
+                               <p className="text-red-500 text-sm mt-1">{consultationErrors.phone}</p>
+                             )}
                           </div>
                           <div>
                             <label htmlFor="consultation-company" className="block mb-2 font-medium">Company</label>
@@ -393,12 +522,15 @@ export default function Contact() {
                         <div className="space-y-4">
                           <div>
                             <label className="block mb-3 font-medium text-lg">Preferred Date *</label>
-                            <DatePicker
-                              date={consultationData.preferredDate}
-                              onDateChange={(date) => handleConsultationInputChange("preferredDate", date)}
-                              placeholder="Select consultation date"
-                              className="w-full"
-                            />
+                                                         <DatePicker
+                               date={consultationData.preferredDate}
+                               onDateChange={(date) => handleConsultationInputChange("preferredDate", date)}
+                               placeholder="Select consultation date"
+                               className="w-full"
+                             />
+                             {consultationErrors.preferredDate && (
+                               <p className="text-red-500 text-sm mt-1">{consultationErrors.preferredDate}</p>
+                             )}
                           </div>
                         </div>
                         
@@ -457,9 +589,16 @@ export default function Contact() {
                         <Button 
                           type="submit" 
                           className="flex-1 bg-blue-600 hover:bg-blue-700 text-white"
-                          disabled={!consultationData.name || !consultationData.email || !consultationData.preferredDate || !consultationData.preferredTime}
+                          disabled={isConsultationSubmitting}
                         >
-                          Schedule Consultation
+                          {isConsultationSubmitting ? (
+                            <>
+                              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                              Scheduling...
+                            </>
+                          ) : (
+                            "Schedule Consultation"
+                          )}
                         </Button>
                       </div>
                     </form>

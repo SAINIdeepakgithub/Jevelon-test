@@ -3,6 +3,7 @@ import { useState, useEffect, Suspense, lazy } from "react";
 import SplashScreen from "./components/SplashScreen";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import ErrorBoundary from "./components/ErrorBoundary";
 import { useScrollToTop } from "./utils/useScrollToTop";
 
 // Lazy load pages for better performance
@@ -37,30 +38,32 @@ function AppContent() {
     <div className="min-h-screen dark">
       <Header />
       <main>
-        <Suspense fallback={<PageLoader />}>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/blog" element={<BlogPage />} />
-            <Route path="/case-studies" element={<CaseStudiesPage />} />
-            <Route path="/faq" element={<FAQPage />} />
-            <Route path="/support" element={<SupportPage />} />
-            <Route path="/careers" element={<CareersPage />} />
-            <Route path="/team" element={<TeamPage />} />
-            <Route path="/privacy" element={<PrivacyPolicyPage />} />
-            <Route path="/terms" element={<TermsOfServicePage />} />
-            <Route path="/cookies" element={<CookiePolicyPage />} />
-            <Route path="/disclaimer" element={<DisclaimerPage />} />
-            {/* Service Pages */}
-            <Route path="/services/frontend-development" element={<FrontendDevelopmentPage />} />
-            <Route path="/services/backend-development" element={<BackendDevelopmentPage />} />
-            <Route path="/services/web-development" element={<WebDevelopmentPage />} />
-            <Route path="/services/mobile-app-development" element={<MobileAppDevelopmentPage />} />
-            <Route path="/services/digital-marketing" element={<DigitalMarketingPage />} />
-            {/* Handle preview_page.html and other unmatched routes */}
-            <Route path="/preview_page.html" element={<HomePage />} />
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
-        </Suspense>
+        <ErrorBoundary>
+          <Suspense fallback={<PageLoader />}>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/blog" element={<BlogPage />} />
+              <Route path="/case-studies" element={<CaseStudiesPage />} />
+              <Route path="/faq" element={<FAQPage />} />
+              <Route path="/support" element={<SupportPage />} />
+              <Route path="/careers" element={<CareersPage />} />
+              <Route path="/team" element={<TeamPage />} />
+              <Route path="/privacy" element={<PrivacyPolicyPage />} />
+              <Route path="/terms" element={<TermsOfServicePage />} />
+              <Route path="/cookies" element={<CookiePolicyPage />} />
+              <Route path="/disclaimer" element={<DisclaimerPage />} />
+              {/* Service Pages */}
+              <Route path="/services/frontend-development" element={<FrontendDevelopmentPage />} />
+              <Route path="/services/backend-development" element={<BackendDevelopmentPage />} />
+              <Route path="/services/web-development" element={<WebDevelopmentPage />} />
+              <Route path="/services/mobile-app-development" element={<MobileAppDevelopmentPage />} />
+              <Route path="/services/digital-marketing" element={<DigitalMarketingPage />} />
+              {/* Handle preview_page.html and other unmatched routes */}
+              <Route path="/preview_page.html" element={<HomePage />} />
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
+          </Suspense>
+        </ErrorBoundary>
       </main>
       <Footer />
     </div>
@@ -84,8 +87,10 @@ export default function App() {
   if (showSplash) return <SplashScreen />;
 
   return (
-    <Router>
-      <AppContent />
-    </Router>
+    <ErrorBoundary>
+      <Router>
+        <AppContent />
+      </Router>
+    </ErrorBoundary>
   );
 }

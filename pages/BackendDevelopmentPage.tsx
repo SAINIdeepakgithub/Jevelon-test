@@ -34,11 +34,7 @@ export default function BackendDevelopmentPage() {
     }
   ];
 
-  const technologies = [
-    "Node.js", "Python", "Java", "C#", "PHP", "Go",
-    "Express.js", "Django", "Spring Boot", ".NET", "Laravel", "Gin",
-    "PostgreSQL", "MongoDB", "MySQL", "Redis", "Elasticsearch", "Docker"
-  ];
+
 
   const benefits = [
     "Scalable and maintainable server-side code",

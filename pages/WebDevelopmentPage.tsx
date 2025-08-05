@@ -34,11 +34,7 @@ export default function WebDevelopmentPage() {
     }
   ];
 
-  const technologies = [
-    "React.js", "Next.js", "Vue.js", "Angular", "Node.js", "Python",
-    "Django", "Laravel", "Express.js", "PostgreSQL", "MongoDB", "Redis",
-    "AWS", "Docker", "Kubernetes", "GraphQL", "REST APIs", "WebSockets"
-  ];
+
 
   const benefits = [
     "End-to-end web development solutions",

@@ -20,7 +20,10 @@ interface BlogPost {
 
 interface BlogCardProps {
   post: BlogPost;
-  variants?: any;
+  variants?: {
+    hidden: { opacity: number; y: number };
+    visible: { opacity: number; y: number };
+  };
 }
 
 export default function BlogCard({ post, variants }: BlogCardProps) {

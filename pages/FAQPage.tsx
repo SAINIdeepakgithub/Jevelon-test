@@ -2,7 +2,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "..
 import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
-import { Search, MessageCircle, Phone, Mail } from "lucide-react";
+import { Search, Phone, Mail } from "lucide-react";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { faqCategories } from "../data/faqData";

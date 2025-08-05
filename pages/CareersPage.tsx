@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
+import { Card, CardContent } from "../components/ui/card";
 import { Button } from "../components/ui/button";
 import { Badge } from "../components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../components/ui/select";
@@ -34,7 +34,7 @@ export default function CareersPage() {
     { icon: Zap, title: "Innovation", description: "Work with cutting-edge technologies" }
   ];
 
-  const openPositions = [
+  const openPositions = useMemo(() => [
     {
       title: "Full-Stack Developer",
       department: "Engineering",
@@ -115,7 +115,7 @@ export default function CareersPage() {
       posted: "1 week ago",
       experience: "2-3 years"
     }
-  ];
+  ], []);
 
   // Filter jobs based on search and filters
   const filteredJobs = useMemo(() => {
@@ -129,7 +129,7 @@ export default function CareersPage() {
       
       return matchesSearch && matchesDepartment && matchesLocation;
     });
-  }, [searchTerm, selectedDepartment, selectedLocation]);
+  }, [searchTerm, selectedDepartment, selectedLocation, openPositions]);
 
   const departments = ["All", "Engineering", "Design", "Marketing", "Infrastructure", "Operations"];
   const locations = ["All", "Jaipur", "Remote"];

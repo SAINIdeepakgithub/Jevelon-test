@@ -61,10 +61,10 @@ function Calendar({
       }}
       components={{
         // @ts-expect-error: IconLeft is not in type definition but is supported by DayPicker
-        IconLeft: ({ className, ...props }: { className?: string; [key: string]: any }) => (
+        IconLeft: ({ className, ...props }: { className?: string; [key: string]: unknown }) => (
           <ChevronLeft className={cn("size-4", className)} {...props} />
         ),
-        IconRight: ({ className, ...props }: { className?: string; [key: string]: any }) => (
+        IconRight: ({ className, ...props }: { className?: string; [key: string]: unknown }) => (
           <ChevronRight className={cn("size-4", className)} {...props} />
         ),
       }}

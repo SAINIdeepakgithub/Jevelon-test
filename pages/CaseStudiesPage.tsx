@@ -1,7 +1,7 @@
 import { Card, CardContent } from "../components/ui/card";
 import { Badge } from "../components/ui/badge";
 import { Button } from "../components/ui/button";
-import { ExternalLink, ArrowRight, TrendingUp, Users, Award } from "lucide-react";
+import { ArrowRight, TrendingUp, Users, Award } from "lucide-react";
 import { motion } from "framer-motion";
 import { ImageWithFallback } from "../components/figma/ImageWithFallback";
 import { caseStudies, caseStudyStats } from "../data/caseStudiesData";

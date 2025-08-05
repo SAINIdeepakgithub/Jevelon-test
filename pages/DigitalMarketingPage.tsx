@@ -34,12 +34,7 @@ export default function DigitalMarketingPage() {
     }
   ];
 
-  const services = [
-    "Search Engine Optimization (SEO)", "Pay-Per-Click (PPC)", "Social Media Management",
-    "Content Marketing", "Email Marketing", "Influencer Marketing",
-    "Google Ads", "Facebook Ads", "LinkedIn Ads", "Analytics & Tracking",
-    "Conversion Rate Optimization", "Local SEO"
-  ];
+
 
   const benefits = [
     "Increased online visibility and brand awareness",

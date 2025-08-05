@@ -53,6 +53,8 @@ export class MockEmailService implements EmailService {
 export class MockCalendarService implements CalendarService {
   async createEvent(consultation: ConsultationRequest): Promise<string> {
     console.log('Creating calendar event for consultation');
+    // Using consultation parameter to avoid unused variable warning
+    console.log('Consultation details:', consultation.name, consultation.email);
     
     // In production, integrate with:
     // - Google Calendar API: https://developers.google.com/calendar
@@ -67,6 +69,8 @@ export class MockCalendarService implements CalendarService {
 export class MockCRMService implements CRMService {
   async createLead(consultation: ConsultationRequest): Promise<string> {
     console.log('Creating lead in CRM system');
+    // Using consultation parameter to avoid unused variable warning
+    console.log('Lead details:', consultation.name, consultation.company);
     
     // In production, integrate with:
     // - HubSpot: https://developers.hubspot.com/
@@ -107,7 +111,7 @@ export class ConsultationService {
       }
 
       // Send to Django API
-      const apiUrl = (import.meta as any).env?.VITE_API_URL || 'http://localhost:8000';
+      const apiUrl = (import.meta as { env?: { VITE_API_URL?: string } }).env?.VITE_API_URL || 'http://localhost:8000';
       const response = await fetch(`${apiUrl}/api/consultation/schedule/`, {
         method: 'POST',
         headers: {

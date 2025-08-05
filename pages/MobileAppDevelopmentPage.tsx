@@ -34,11 +34,7 @@ export default function MobileAppDevelopmentPage() {
     }
   ];
 
-  const technologies = [
-    "React Native", "Flutter", "Swift", "Kotlin", "Xamarin", "Ionic",
-    "Firebase", "AWS Mobile", "Redux", "MobX", "GraphQL", "REST APIs",
-    "Push Notifications", "In-App Purchases", "Analytics", "Crash Reporting"
-  ];
+
 
   const benefits = [
     "Native performance and user experience",

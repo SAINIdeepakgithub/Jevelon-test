@@ -17,18 +17,18 @@ export interface SupportTicketResponse {
   success: boolean;
   message: string;
   ticket_id?: string;
-  errors?: any;
+  errors?: unknown;
   error?: string;
 }
 
 class SupportService {
-  private baseUrl = (import.meta as any).env?.VITE_API_URL || 'http://localhost:8000/api/support';
+  private baseUrl = (import.meta as { env?: { VITE_API_URL?: string } }).env?.VITE_API_URL || 'http://localhost:8000/api/support';
 
   async submitSupportTicket(ticketData: SupportTicket): Promise<SupportTicketResponse> {
     try {
       const response = await axios.post(`${this.baseUrl}/submit/`, ticketData);
       return response.data;
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error submitting support ticket:', error);
       if (error.response) {
         return error.response.data;
