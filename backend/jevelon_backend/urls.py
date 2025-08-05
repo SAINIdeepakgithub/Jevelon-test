@@ -16,18 +16,30 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.conf import settings
+from django.conf.urls.static import static
 import os
 
 def health_check(request):
+    try:
+        # Test database connection
+        from django.db import connection
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT 1")
+            db_status = "connected"
+    except Exception as e:
+        db_status = f"error: {str(e)}"
+    
     return JsonResponse({
         'status': 'ok',
         'message': 'Jevelon Backend is running',
         'debug': settings.DEBUG,
         'allowed_hosts': settings.ALLOWED_HOSTS,
         'cors_origins': settings.CORS_ALLOWED_ORIGINS,
-        'database_configured': bool(settings.DATABASES['default']['NAME']),
+        'database_status': db_status,
+        'static_root': str(settings.STATIC_ROOT),
+        'static_url': settings.STATIC_URL,
         'endpoints': {
             'admin': '/admin/',
             'contact': '/api/contact/submit/',
@@ -44,6 +56,10 @@ def test_endpoint(request):
         'headers': dict(request.headers)
     })
 
+def favicon_handler(request):
+    """Handle favicon requests to prevent 400 errors"""
+    return HttpResponse(status=204)  # No content response
+
 urlpatterns = [
     path('', health_check, name='health_check'),
     path('test/', test_endpoint, name='test_endpoint'),
@@ -52,3 +68,7 @@ urlpatterns = [
     path('api/consultation/', include('consultation.urls')),
     path('api/support/', include('support.urls')),
 ]
+
+# Serve static files during development
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

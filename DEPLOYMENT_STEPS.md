@@ -93,8 +93,9 @@ python manage.py createsuperuser
 3. Test admin: `https://jevelon.onrender.com/admin/`
 4. Test API: `https://jevelon.onrender.com/api/contact/`
 
-### Step 9: Troubleshooting 400 Bad Request
+### Step 9: Troubleshooting Common Errors
 
+#### 400 Bad Request Error
 If you get a 400 Bad Request error, check these common issues:
 
 1. **Environment Variables**: Ensure all required environment variables are set in Render
@@ -103,6 +104,15 @@ If you get a 400 Bad Request error, check these common issues:
 4. **Secret Key**: Ensure SECRET_KEY is properly set (not DJANGO_SECRET_KEY)
 5. **Debug Mode**: Set DEBUG=True temporarily to see detailed error messages
 
+#### 502 Bad Gateway Error (Admin Endpoint)
+If you get a 502 error for the admin endpoint:
+
+1. **Check Render Logs**: Go to Render dashboard → Logs tab for detailed error messages
+2. **Run Debug Script**: In Render shell, run: `python debug_admin.py`
+3. **Check Database**: Ensure database is connected and migrations are run
+4. **Create Admin User**: Run `python manage.py createsuperuser` in Render shell
+5. **Check Static Files**: Ensure static files are collected properly
+
 **Quick Debug Steps:**
 ```bash
 # Check the health endpoint for configuration info
@@ -110,6 +120,9 @@ curl https://jevelon.onrender.com/
 
 # Check if test endpoint works
 curl https://jevelon.onrender.com/test/
+
+# Run debug script in Render shell
+python debug_admin.py
 ```
 
 ---
